@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/home_page"
+    app:startDestination="@id/notification_recycle_view">
+    <fragment
+        android:id="@+id/notification_recycle_view"
+        android:name="k12tt.luongvany.nghiencuukhoahoc.homescreen.NotificationList"
+        android:label="@string/home_page_label"
+        tool:layout="@layout/list_notification">
+        <action
+            android:id="@+id/action_notification_recylceview_to_notification_detail"
+            app:destination="@id/notification_detail"/>
+    </fragment>
+    <fragment
+        android:id="@+id/notification_detail"
+        android:name="k12tt.luongvany.nghiencuukhoahoc.homescreen.NotificationDetail"
+        android:label="Detail"
+        tool:layout="@layout/notification_detail">
+    </fragment>
+
+</navigation>
