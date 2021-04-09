@@ -36,10 +36,6 @@ class NotificationList : Fragment(){
         fun newInstance() = NotificationList()
     }
 
-    override fun onDetach() {
-        super.onDetach()
-
-    }
 }
 
 class Adapter(

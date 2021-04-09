@@ -1,4 +1,4 @@
-package k12tt.luongvany.nghiencuukhoahoc.notificationUtil
+package k12tt.luongvany.nghiencuukhoahoc.utils.notificationUtil
 
 import android.app.PendingIntent
 import android.content.Context

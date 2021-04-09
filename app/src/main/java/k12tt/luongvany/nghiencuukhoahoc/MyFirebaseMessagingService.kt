@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import k12tt.luongvany.nghiencuukhoahoc.notificationUtil.createIntentListener
+import k12tt.luongvany.nghiencuukhoahoc.utils.notificationUtil.createIntentListener
 
 class MyFirebaseMessagingService : FirebaseMessagingService(){
     private var broadcaster: LocalBroadcastManager? = null

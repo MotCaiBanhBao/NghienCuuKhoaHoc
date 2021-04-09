@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto">
     <!-- Base application theme. -->
     <style name="Theme.NghienCuuKhoaHoc" parent="Theme.MaterialComponents.DayNight.NoActionBar" >
         <!-- Primary brand color. -->
@@ -17,15 +17,41 @@
         <!-- Style bottom nav bar -->
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
         <item name="android:textColor">@color/green_main</item>
+        <item name="android:textAllCaps">false</item>
 
     </style>
 //////////////////////
-    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
 
-        <item name="titleTextAppearance">@style/TextAppearance.Headline6</item>
+    <style name="Widget.MaterialComponents.Button.LoginEmail">
+        <item name="backgroundTint">@color/blue_main</item>
+        <item name="android:background">@drawable/button_login_background</item>
+        <item name="icon">@drawable/ic_login_email</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">3dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/sf_pro_text</item>
+    </style>
+    <style name="Widget.MaterialComponents.Button.LoginGGFB">
+        <item name="backgroundTint">@color/green_main</item>
+        <item name="android:background">@drawable/button_login_background</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
     </style>
 
+    <style name="FacebookLoginButton">
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/button_login_background</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+    ///////////////////////////////////////////////////
+
+    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Headline6</item>
+    </style>
     <style name="ThemeOverlay.App.Toolbar" parent="">
         <item name="colorPrimary">@color/main_background</item>
         <item name="colorPrimaryVariant">@color/green_secondary</item>
@@ -34,11 +60,10 @@
         <item name="hideOnScroll">true</item>
         <item name="android:hideOnContentScroll">true</item>
     </style>
-
     <style name="TextAppearance.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/sf_pro_display_bold</item>
-        <item name="android:fontFamily">@font/head_line6</item>
-        <item name="android:textSize">32sp</item>
+        <item name="android:fontFamily">@font/head_line</item>
+        <item name="android:textSize">40sp</item>
     </style>
 
 //////////////////
@@ -68,8 +93,5 @@
         <item name="android:textColorHint">@android:color/white</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_background</item>
-    </style>
 </resources>
 

@@ -33,9 +33,9 @@ class NotificationDetail : Fragment(){
             )
 
             startActivityForResult(AuthUI.getInstance()
-                    .createSignInIntentBuilder()
-                    .setLogo(R.mipmap.ic_app_logo)
-                    .setAvailableProviders(providers).build(), 1)
+                .createSignInIntentBuilder()
+                .setLogo(R.mipmap.ic_app_logo)
+                .setAvailableProviders(providers).build(), 1)
         }
 
         return view

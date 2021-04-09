@@ -4,10 +4,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/drawer_layout"
-        android:background="@color/main_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:background="@color/main_background">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -19,16 +19,26 @@
             android:layout_height="wrap_content"
             app:liftOnScroll="true"
             android:elevation="0dp">
-
             <com.google.android.material.appbar.MaterialToolbar
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 android:id="@+id/topAppBar"
                 style="@style/Widget.App.Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/top_app_bar"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
-                app:title="@string/toolbar_title" />
+                app:title="@string/toolbar_title">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_marginEnd="17dp"
+                    android:id="@+id/user_picture_profile"
+                    android:layout_gravity="end"
+                    android:background="@drawable/user_profile"
+                    android:backgroundTint="@color/main_background"
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    />
+            </com.google.android.material.appbar.MaterialToolbar>
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.fragment.app.FragmentContainerView

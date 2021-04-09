@@ -6,5 +6,4 @@ import java.util.*
 data class Notification(val id: UUID = UUID.randomUUID(),
                         var title: String,
                         var context: String,
-                        var link: LinkAddress) {
-}
+                        var link: LinkAddress)

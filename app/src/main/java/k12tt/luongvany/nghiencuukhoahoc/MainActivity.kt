@@ -1,60 +1,69 @@
 package k12tt.luongvany.nghiencuukhoahoc
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.core.view.MenuCompat
-import androidx.core.view.isInvisible
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.data.model.User
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.messaging.FirebaseMessaging
+import com.squareup.picasso.Picasso
 import k12tt.luongvany.nghiencuukhoahoc.databinding.ActivityMainBinding
+import k12tt.luongvany.nghiencuukhoahoc.utils.AppPreference
+
 
 private const val TAG = "TEST"
 class MainActivity : AppCompatActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
     private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("TEST", "Main")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        auth = FirebaseAuth.getInstance()
+        createToken()
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
-        if (FirebaseAuth.getInstance().currentUser == null) {
-            val providers = arrayListOf(
-                AuthUI.IdpConfig.EmailBuilder().build(),
-                AuthUI.IdpConfig.GoogleBuilder().build(),
-                AuthUI.IdpConfig.FacebookBuilder().build()
-            )
+    }
 
-            startActivityForResult(
-                AuthUI.getInstance()
-                    .createSignInIntentBuilder()
-                    .setLogo(R.mipmap.ic_app_logo)
-                    .setTheme(R.style.LoginTheme)
-                    .setAvailableProviders(providers).build(), 1
-            )
+    override fun onStart() {
+        super.onStart()
+        Picasso.get().load(UserSingleTon.getUserPhotoUrl()).fit().centerCrop().into(binding.userPictureProfile)
+        binding.userPictureProfile.setOnClickListener{
+            val intent = Intent(this, UserProfile::class.java)
+            startActivityForResult(intent, USER_PROFILE)
         }
-        if (!checkGooglePlayServices()) {
-            GoogleApiAvailability.getInstance().makeGooglePlayServicesAvailable(this)
-        } else {
-            createToken()
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == USER_PROFILE){
+            if (resultCode == RESULT_OK){
+                val intent = Intent(baseContext, MainLogin::class.java).apply{
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                AppPreference.isLogin = false
+                auth.signOut()
+                startActivity(intent)
+                finish()
+            }
         }
     }
 
@@ -63,18 +72,23 @@ class MainActivity : AppCompatActivity() {
         setupBottomNavigationBar()
     }
 
-
     private fun setupBottomNavigationBar() {
 
         val navGraphIds = listOf(R.navigation.list_notification)
 
-        val controller = binding.bottomNavigationView.setupWithNavController(navGraphIds = navGraphIds,
-                fragmentManager =  supportFragmentManager,
-                containerId =  R.id.nav_host_container,
-                intent = intent)
+        val controller = binding.bottomNavigationView.setupWithNavController(
+            navGraphIds = navGraphIds,
+            fragmentManager = supportFragmentManager,
+            containerId = R.id.nav_host_container,
+            intent = intent
+        )
 
-        controller.observe(this, Observer { navController->
-            binding.topAppBar.setupWithNavController(navController, AppBarConfiguration(navController.graph))
+        controller.observe(this, Observer { navController ->
+            binding.topAppBar.setupWithNavController(
+                navController, AppBarConfiguration(
+                    navController.graph
+                )
+            )
         })
 
         currentNavController = controller
@@ -100,7 +114,7 @@ class MainActivity : AppCompatActivity() {
     private fun createToken(){
         FirebaseMessaging.getInstance().token
             .addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful){
+                if (!task.isSuccessful) {
                     return@OnCompleteListener
                 }
 
@@ -111,5 +125,7 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-
+    companion object{
+        private const val USER_PROFILE = 1
+    }
 }

@@ -5,7 +5,7 @@
     <string name="message_page_label">Message</string>
     <string name="home_page_label">Home</string>
     <string name="udck_detail_label">Detail</string>
-    <string name="user_picture">User</string>
+    <string name="user_picture_detail">User</string>
     <string name="toolbar_title">UDCK</string>
     <string name="search_bar_label">Search</string>
 
@@ -19,4 +19,11 @@
     <string name="channelId" translatable="false">Default</string>
     <string name="shareDes">Share</string>
     <string name="hind_search">Find notification</string>
+    <string name="login_with_email">Continue With Email</string>
+    <string name="user_picture_uri" translatable="false">%s</string>
+    <string name="facebook_app_id" translatable="false">525421135104293</string>
+    <string name="default_notification_channel_id" translatable="false">Default</string>
+    <string name="edit_profile_button">Edit Profile</string>
+    <string name="logout_button">Logout</string>
+
 </resources>
