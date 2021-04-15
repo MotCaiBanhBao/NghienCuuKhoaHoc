@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_page_label">Thông báo</string>
+    <string name="message_page_label">Tin nhắn</string>
+    <string name="home_page_label">Trang chủ</string>
+    <string name="udck_detail_label">Chi tiết</string>
+    <string name="toolbar_title">UDCK</string>
+    <string name="user_picture_detail">Người dùng</string>
+    <string name="search_bar_label">Tìm kiếm</string>
+    <string name="notification_title">Tiêu đề</string>
+    <string name="notification_content">Nội dung</string>
+    <string name="shareDes">Chia sẻ</string>
+    <string name="hind_search">Tìm kiếm</string>
+    <string name="login_with_email">Tiếp tục với email</string>
+    <string name="logout_button">Đăng xuất</string>
+    <string name="edit_profile_button">"Sửa chữa hồ sơ "</string>
+</resources>

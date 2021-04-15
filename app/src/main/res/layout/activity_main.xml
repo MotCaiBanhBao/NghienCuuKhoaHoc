@@ -27,16 +27,34 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:title="@string/toolbar_title">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_marginEnd="17dp"
-                    android:id="@+id/user_picture_profile"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_gravity="end"
-                    android:background="@drawable/user_profile"
-                    android:backgroundTint="@color/main_background"
-                    android:layout_width="43dp"
-                    android:layout_height="43dp"
-                    />
+                    android:layout_marginEnd="17dp"
+                    android:layout_height="wrap_content">
+                        <com.skydoves.powerspinner.PowerSpinnerView
+                          android:id="@+id/language_choose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            app:spinner_arrow_tint="@color/green_main"
+                            app:spinner_arrow_gravity="end"
+                            app:spinner_arrow_padding="8dp"
+                            app:spinner_divider_color="@color/green_main"
+                            app:spinner_divider_show="true"
+                            app:spinner_divider_size="0.2dp"
+                            app:spinner_popup_animation="dropdown"
+                            app:spinner_popup_background="@color/main_background"
+                            app:spinner_popup_elevation="14dp"/>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/user_picture_profile"
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
+                        android:layout_gravity="end"
+                        android:background="@drawable/user_profile"
+                        android:backgroundTint="@color/main_background" />
+                </LinearLayout>
+
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -51,6 +69,19 @@
             android:layout_marginBottom="12dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/send_notification_float_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="60dp"
+            app:fabSize="normal"
+            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_send_notification"
+            android:contentDescription="@string/send_float_button_desc"/>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             app:layout_scrollFlags="scroll|enterAlways|snap"
@@ -59,6 +90,5 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             app:menu="@menu/bottom_nav_menu" />
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

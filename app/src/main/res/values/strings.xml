@@ -25,5 +25,12 @@
     <string name="default_notification_channel_id" translatable="false">Default</string>
     <string name="edit_profile_button">Edit Profile</string>
     <string name="logout_button">Logout</string>
-
+    
+    <array name="language">
+        <item>EN</item>
+        <item>VN</item>
+        <item>Lao</item>
+        <item>KH</item>
+    </array>
+    <string name="send_float_button_desc">Send notification</string>
 </resources>

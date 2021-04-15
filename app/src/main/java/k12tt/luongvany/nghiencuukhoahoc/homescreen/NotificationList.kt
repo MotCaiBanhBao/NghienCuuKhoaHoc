@@ -9,9 +9,12 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import k12tt.luongvany.nghiencuukhoahoc.R
+import k12tt.luongvany.nghiencuukhoahoc.database.Notification
+import k12tt.luongvany.nghiencuukhoahoc.database.NotificationData
 
 class NotificationList : Fragment(){
     private lateinit var parentAppBarLayout: AppBarLayout
@@ -31,7 +34,6 @@ class NotificationList : Fragment(){
 
         return view
     }
-
     companion object{
         fun newInstance() = NotificationList()
     }
@@ -42,6 +44,7 @@ class Adapter(
     private val testValue: Array<String>,
     private val parentAppBarLayout: AppBarLayout?,
     private val bottomNavigationView: BottomNavigationView?): RecyclerView.Adapter<Adapter.ViewHolder>(){
+//    val options: FirebaseRecyclerOptions<NotificationData> = FirebaseRecyclerOptions.Builder<NotificationData>().setQuery(Notification.instance.notificationReference, NotificationData::class.java).build()
 
     class ViewHolder(val item: View): RecyclerView.ViewHolder(item)
 
@@ -55,12 +58,9 @@ class Adapter(
             parentAppBarLayout?.setExpanded(true)
             bottomNavigationView?.let {
                it.visibility = View.GONE
-
             }
-
             holder.item.findNavController().navigate(R.id.action_notification_recylceview_to_notification_detail, bundle)
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

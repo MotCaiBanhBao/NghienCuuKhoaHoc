@@ -3,7 +3,7 @@
 
     <string name="notification_page_label">Notification</string>
     <string name="message_page_label">Message</string>
-    <string name="home_page_label">Home</string>
+    <string name="home_page_label">ផ្ទះ</string>
     <string name="udck_detail_label">Detail</string>
     <string name="toolbar_title">UDCK</string>
 </resources>
