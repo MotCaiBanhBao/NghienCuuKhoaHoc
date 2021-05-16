@@ -14,16 +14,16 @@ versions.benchmark = "1.1.0"
 versions.cardview = "1.0.0"
 versions.constraint_layout = "2.0.4"
 versions.core_ktx = "1.3.2"
-versions.coroutines = "1.4.3"
+versions.coroutines = "1.3.5"
 versions.dagger = "2.33"
 versions.dexmaker = "2.33"
 versions.espresso = "3.3.0"
 versions.fragment = "1.3.0"
 versions.glide = "4.12.0"
 versions.hamcrest = "1.3"
-versions.junit = "5.8.0-M1"
+versions.junit = "4.13.2"
 versions.kotlin = "1.4.31"
-versions.lifecycle = "2.2.0"
+versions.lifecycle = '2.2.0'
 versions.material = "1.3.0"
 versions.mockito = "3.8.0"
 versions.mockito_all = "1.10.19"
@@ -35,13 +35,20 @@ versions.paging = "3.0.0-beta01"
 versions.recyclerview = "1.2.0-beta02"
 versions.retrofit = "2.9.0"
 versions.robolectric = "4.5.1"
-versions.room = "2.3.0-beta02"
+versions.room = "2.3.0"
 versions.rx_android = "2.1.1"
 versions.rxjava2 = "2.2.21"
 versions.timber = "4.7.1"
 versions.transition = "1.4.0"
 versions.truth = "1.1.2"
 versions.work = "2.5.0"
+versions.coroutines_version = "1.4.3"
+versions.koin_version = "2.1.5"
+versions.firebase = "26.7.0"
+versions.firebase_store = "22.1.2"
+versions.firebase_storage = "19.2.2"
+versions.firebase_ui = "7.1.1"
+versions.mockk = "1.11.0"
 ext.versions = versions
 
 def build_versions = [:]
@@ -62,6 +69,14 @@ deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_g
 deps.annotations = "androidx.annotation:annotation:$versions.annotations"
 
 deps.app_compat = "androidx.appcompat:appcompat:$versions.appcompat"
+
+def koin = [:]
+koin.android = "org.koin:koin-android:$versions.koin_version"
+koin.core = "org.koin:koin-core:$versions.koin_version"
+koin.viewmodelx = "org.koin:koin-androidx-viewmodel:$versions.koin_version"
+koin.viewmodel = "org.koin:koin-android-viewmodel:$versions.koin_version"
+koin.scope =  "org.koin:koin-android-scope:$versions.koin_version"
+deps.koin = koin
 
 def arch_core = [:]
 arch_core.runtime = "androidx.arch.core:core-runtime:$versions.arch_core"
@@ -87,6 +102,7 @@ deps.core_ktx = "androidx.core:core-ktx:$versions.core_ktx"
 def coroutines = [:]
 coroutines.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
 coroutines.test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines"
+coroutines.core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
 deps.coroutines = coroutines
 
 def dagger = [:]
@@ -118,7 +134,7 @@ deps.glide = glide
 
 deps.hamcrest = "org.hamcrest:hamcrest-all:$versions.hamcrest"
 
-deps.junit = "org.junit.jupiter:junit-jupiter-api:$versions.junit"
+deps.junit = "junit:junit:$versions.junit"
 
 def kotlin = [:]
 kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
@@ -133,6 +149,7 @@ lifecycle.java8 = "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle
 lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
 lifecycle.viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
 lifecycle.livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
 deps.lifecycle = lifecycle
 
 deps.material = "com.google.android.material:material:$versions.material"
@@ -196,6 +213,20 @@ work.runtime_ktx = "androidx.work:work-runtime-ktx:$versions.work"
 deps.work = work
 
 ext.deps = deps
+
+def firebase = [:]
+firebase.bom = "com.google.firebase:firebase-bom:$versions.firebase"
+firebase.analytics_ktx = "com.google.firebase:firebase-analytics-ktx"
+firebase.firebase_ui_auth = "com.firebaseui:firebase-ui-auth:$versions.firebase_ui"
+firebase.firebase_auth = "com.google.firebase:firebase-auth-ktx"
+firebase.messaging = "com.google.firebase:firebase-messaging-ktx"
+firebase.database = "com.google.firebase:firebase-database"
+firebase.firebase_ui_database = "com.firebaseui:firebase-ui-database:$versions.firebase_ui"
+firebase.firebase_store = "com.google.firebase:firebase-firestore-ktx:$versions.firebase_store"
+firebase.firebase_storage = "com.google.firebase:firebase-storage-ktx:$versions.firebase_storage"
+deps.firebase = firebase
+
+deps.mockk = "io.mockk:mockk:$versions.mockk"
 
 def addRepos(RepositoryHandler handler) {
     handler.google()

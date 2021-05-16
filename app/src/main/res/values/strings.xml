@@ -1,36 +1,31 @@
 <resources>
     <string name="app_name" translatable="false">UDCK</string>
 
-    <string name="notification_page_label">Notification</string>
-    <string name="message_page_label">Message</string>
     <string name="home_page_label">Home</string>
-    <string name="udck_detail_label">Detail</string>
-    <string name="user_picture_detail">User</string>
-    <string name="toolbar_title">UDCK</string>
-    <string name="search_bar_label">Search</string>
 
-    <string name="notification_title">Title</string>
-    <string name="notification_content">Content</string>
-    <string name="notification_date">20/4/2000</string>
-    <string name="facebook_application_id" translatable="false">525421135104293</string>
-    <string name="facebook_login_protocol_scheme" translatable="false">361f5a92ac506e1dd2e3b9d189716994</string>
-    <string name="msg_token_fms" translatable="false" >%s</string>
-
-    <string name="channelId" translatable="false">Default</string>
-    <string name="shareDes">Share</string>
-    <string name="hind_search">Find notification</string>
     <string name="login_with_email">Continue With Email</string>
-    <string name="user_picture_uri" translatable="false">%s</string>
-    <string name="facebook_app_id" translatable="false">525421135104293</string>
     <string name="default_notification_channel_id" translatable="false">Default</string>
-    <string name="edit_profile_button">Edit Profile</string>
-    <string name="logout_button">Logout</string>
-    
-    <array name="language">
-        <item>EN</item>
-        <item>VN</item>
-        <item>Lao</item>
-        <item>KH</item>
-    </array>
+    <string name="text_notification_type_thoikhoabieu">Thời khoá biểu</string>
+    <string name="text_notification_type_thongbao">Thông báo</string>
+    <string name="string_error_signin">Error login</string>
+    <string name="msg_token_fms" translatable="false" >%s</string>
+    <string name="button_share_decs">Share</string>
     <string name="send_float_button_desc">Send notification</string>
+    <string name="send_notification_error">This account does not have permission to send notices</string>
+    <string name="send_notification_succes">Success</string>
+    <string name="publisher_hint">Bạn là?</string>
+    <string name="target_hint">Bạn muốn gửi cho lớp nào</string>
+    <string name="content_hint">Bạn muốn thông báo nội dung gì</string>
+    <string name="thoikhoabieu_radiobutton">Thời khoá biểu</string>
+    <string name="thong_bao_radiobutton">Thông báo</string>
+    <string name="detail_hint">Địa chỉ để xem chi tiết</string>
+    <string name="push_button">Gửi</string>
+    <string name="message_page_label">Message</string>
+    <string name="udck_detail_label">Detail</string>
+    <string name="notification_page_label">Notification</string>
+    <string name="toolbar_title">UDCK</string>
+    <string name="form_title">Form</string>
+    <string name="detail_title">Detail</string>
+    <string name="user_detail">User</string>
+    <string name="logout_button">Logout</string>
 </resources>

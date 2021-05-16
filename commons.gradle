@@ -1,0 +1,11 @@
+dependencies {
+    implementation deps.koin.android
+    implementation deps.koin.core
+
+    implementation deps.coroutines.android
+    implementation deps.coroutines.core
+
+    implementation deps.kotlin.stdlib
+
+    testImplementation deps.junit
+}

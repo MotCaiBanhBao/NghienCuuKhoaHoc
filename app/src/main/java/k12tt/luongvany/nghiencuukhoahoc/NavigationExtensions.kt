@@ -1,6 +1,7 @@
 package k12tt.luongvany.nghiencuukhoahoc
 
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.util.SparseArray
 import androidx.core.util.forEach
@@ -9,8 +10,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import k12tt.luongvany.presentation.binding.NotificationBinding
 
 private const val TEST = "Navigation"
 fun BottomNavigationView.setupWithNavController(

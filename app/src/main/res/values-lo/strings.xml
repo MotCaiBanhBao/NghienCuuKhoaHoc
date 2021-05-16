@@ -1,9 +1,5 @@
 <resources>
     <string name="app_name">UDCK</string>
 
-    <string name="notification_page_label">ແຈ້ງການ</string>
-    <string name="message_page_label">ຂໍ້ຄວາມ</string>
     <string name="home_page_label">ໝ້າ ຫລັກ</string>
-    <string name="udck_detail_label">ລາຍ ລະ ອງດ</string>
-    <string name="toolbar_title">UDCK</string>
 </resources>

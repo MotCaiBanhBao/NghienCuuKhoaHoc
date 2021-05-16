@@ -1,0 +1,3 @@
+package k12tt.luongvany.data_fb.entities
+
+data class NotificationDataFCM(val title: String, val message: String)

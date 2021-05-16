@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
+import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -16,23 +19,44 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessaging
 import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.squareup.picasso.Picasso
-import k12tt.luongvany.nghiencuukhoahoc.database.Notification
-import k12tt.luongvany.nghiencuukhoahoc.database.NotificationData
 import k12tt.luongvany.nghiencuukhoahoc.databinding.ActivityMainBinding
+import k12tt.luongvany.nghiencuukhoahoc.notificationview.TOPIC
 import k12tt.luongvany.nghiencuukhoahoc.utils.AppPreference
+import k12tt.luongvany.presentation.Router
+import k12tt.luongvany.presentation.auth.Auth
+import k12tt.luongvany.presentation.auth.AuthStateListener
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 
-private const val TAG = "TEST"
 class MainActivity : AppCompatActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
     private lateinit var binding: ActivityMainBinding
-    private lateinit var auth: FirebaseAuth
+
+    val auth: Auth<Int, Intent> by inject { parametersOf(this@MainActivity) }
+    val router: Router by inject { parametersOf(this@MainActivity) }
+
+    private val authListener: AuthStateListener =
+        object : AuthStateListener {
+            override fun onAuthChanged(isLoggedIn: Boolean) {
+                if (!isLoggedIn) {
+                    router.showLogin()
+                }
+            }
+        }
+
+    override fun onBackPressed() {
+        if (router.isInRootScreen()) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val context: ContextWrapper? = AppPreference.language?.let { Language.wrap(this@MainActivity , it) }
@@ -42,7 +66,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        auth = FirebaseAuth.getInstance()
         createToken()
 
         if (savedInstanceState == null) {
@@ -51,19 +74,19 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-        Picasso.get().load(UserSingleTon.getUserPhotoUrl()).fit().centerCrop().into(binding.userPictureProfile)
+        showUserImage()
 
         binding.userPictureProfile.setOnClickListener{
-            val intent = Intent(this, UserProfile::class.java)
-            startActivityForResult(intent, USER_PROFILE)
+            router.showUserDetail()
         }
+
         setUpLanguageChoose()
+        auth.addAuthChangeListener(authListener)
+    }
 
-        binding.sendNotificationFloatButton.setOnClickListener{
-            Log.d("TEST", "FIREBASE")
-            Notification.instance.pushNotification(NotificationData("Tuan", "TEST", "TEST", 1, "TEST"))
-        }
-
+    override fun onStop() {
+        super.onStop()
+        auth.removeAuthChangeListener(authListener)
     }
 
     private fun setUpLanguageChoose(){
@@ -121,17 +144,28 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == USER_PROFILE){
-            if (resultCode == RESULT_OK){
-                val intent = Intent(baseContext, MainLogin::class.java).apply{
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-                AppPreference.isLogin = false
-                auth.signOut()
-                startActivity(intent)
-                finish()
+        if (requestCode == RC_GOOGLE_SIGN_IN) {
+            try {
+                auth.handleSignInResult(data,
+                    {
+                        router.showNotificationsList()
+                        showUserImage()
+                    },
+                    {
+                        showErrorSignIn()
+                    })
+            } catch (e: Exception) {
+                showErrorSignIn()
             }
         }
+    }
+
+    fun startSignIn() {
+        auth.startSignIn(RC_GOOGLE_SIGN_IN)
+    }
+
+    private fun showErrorSignIn() {
+        Toast.makeText(this, R.string.string_error_signin, Toast.LENGTH_SHORT).show()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -140,8 +174,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigationBar() {
-        val navGraphIds = listOf(R.navigation.list_notification)
+        val navGraphIds = listOf(R.navigation.nav_graph)
 
+        Log.d("TEST", "Co chay")
         val controller = binding.bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
@@ -171,13 +206,21 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 val token = task.result
+                MyFirebaseMessagingService.token = token
 
                 val msg = getString(R.string.msg_token_fms, token)
-                Toast.makeText(baseContext ,msg, Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
             })
+
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
     }
 
-    companion object{
-        private const val USER_PROFILE = 1
+    private fun showUserImage(){
+        Picasso.get().load(UserSingleTon.getUserPhotoUrl()).fit().centerCrop().into(binding.userPictureProfile)
+
+    }
+
+    companion object {
+        const val RC_GOOGLE_SIGN_IN = 1
     }
 }

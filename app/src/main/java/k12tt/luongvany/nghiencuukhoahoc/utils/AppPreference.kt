@@ -2,7 +2,6 @@ package k12tt.luongvany.nghiencuukhoahoc.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.versionedparcelable.ParcelImpl
 import k12tt.luongvany.nghiencuukhoahoc.Language
 
 object AppPreference {
