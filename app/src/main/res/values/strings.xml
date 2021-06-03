@@ -20,7 +20,7 @@
     <string name="thong_bao_radiobutton">Thông báo</string>
     <string name="detail_hint">Địa chỉ để xem chi tiết</string>
     <string name="push_button">Gửi</string>
-    <string name="message_page_label">Message</string>
+    <string name="choose_target_page_label">Choose</string>
     <string name="udck_detail_label">Detail</string>
     <string name="notification_page_label">Notification</string>
     <string name="toolbar_title">UDCK</string>
@@ -28,4 +28,24 @@
     <string name="detail_title">Detail</string>
     <string name="user_detail">User</string>
     <string name="logout_button">Logout</string>
+    <string name="test_viewmodel_notification_url">Test @{viewModel.notification.url}</string>
+    <string name="thoi_khoa_bieu_label">Thời khoá biểu</string>
+    <string name="thong_bao_label">Thông báo</string>
+    <string name="all_label">All</string>
+    <string name="user_name">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="re_password">Re Password</string>
+    <string name="login">Login</string>
+    <string name="welcome">Welcome!</string>
+    <string name="welcome_des">Chào mừng bạn đã đến với ứng dụng thông báo của UDCK</string>
+    <string name="get_notification">Get Notification!</string>
+    <string name="get_notification_des">Nhận thông báo từ nhà trường một cách nhanh nhất</string>
+    <string name="subscribe">Subcribe!</string>
+    <string name="get_sub_des">Chỉ nhận những thông tin nào mà bạn muốn bằng cách đăng kí</string>
+    <string name="multi_language">Localization</string>
+    <string name="get_localization_des">Bạn có thể tuỳ chỉnh ngôn ngữ của bạn</string>
+    <string name="save_button">Save</string>
+    <string name="khoa_ky_thuat_desc">Khoa kỹ thuật nông nghiệp</string>
+    <string name="khoa_kinh_te_desc">Khoa kinh tế</string>
+    <string name="khoa_su_pham_desc">Khoa sư phạm và dự bị đại học</string>
 </resources>

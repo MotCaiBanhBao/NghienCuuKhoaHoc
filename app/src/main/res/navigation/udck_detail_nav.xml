@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/udck_detail_page"
+    app:startDestination="@id/webview">
+    <fragment
+        android:id="@+id/webview"
+        android:name="k12tt.luongvany.nghiencuukhoahoc.notificationview.UdckDetailFragment"
+        android:label="WebView"
+        tool:layout="@layout/udck_detail_layout">
+    </fragment>
+</navigation>

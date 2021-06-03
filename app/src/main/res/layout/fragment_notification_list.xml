@@ -1,28 +1,59 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    >
     <data>
         <import type="k12tt.luongvany.presentation.ViewState"/>
-
+        <import type="k12tt.luongvany.domain.entities.NotificationType"/>
         <variable
             name="viewModel"
-            type="k12tt.luongvany.presentation.NotificationListViewModel"/>
+            type="k12tt.luongvany.presentation.viewmodel.notification.NotificationListViewModel"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="k12tt.luongvany.nghiencuukhoahoc.notificationview.NotificationListFragment">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvNotifications"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:data="@{viewModel.state().data}"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="1"
-            tools:listitem="@layout/item_notification"/>
+            android:orientation="vertical">
+            <com.google.android.material.chip.ChipGroup
+                android:layout_marginStart="8dp"
+                android:id="@+id/chip_group"
+                android:layout_width="wrap_content"
+                app:singleSelection="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:id="@+id/chip_all"
+                    android:layout_height="wrap_content"
+                    android:text="@string/all_label"/>
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:id="@+id/chip_tkb"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_height="wrap_content"
+                    android:text="@string/thoi_khoa_bieu_label"/>
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:id="@+id/chip_tb"
+                    android:layout_height="wrap_content"
+                    android:text="@string/thong_bao_label"/>
+            </com.google.android.material.chip.ChipGroup>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNotifications"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:data="@{viewModel.state().data}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="1"
+                tools:listitem="@layout/item_notification"/>
+        </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/sendNoti"

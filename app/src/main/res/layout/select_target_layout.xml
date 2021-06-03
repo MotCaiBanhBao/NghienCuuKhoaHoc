@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="k12tt.luongvany.presentation.TwoDataViewState"/>
+        <import type="k12tt.luongvany.presentation.ViewState"/>
+        <variable
+            name="viewModel"
+            type="k12tt.luongvany.presentation.viewmodel.topic.TopicsViewModel"/>
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/choose_target_noti_layout"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:elevation="0dp">
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="6dp"
+                    app:contentInsetStartWithNavigation="0dp"/>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <ScrollView
+                android:id="@+id/scroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:id="@+id/mainLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/choose_target_backgroud_icon"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/kythuat_switch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/khoa_ky_thuat_desc" />
+
+                        <HorizontalScrollView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/khoa_ky_thuat_chip_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom_layout_rouded"></com.google.android.material.chip.ChipGroup>
+                        </HorizontalScrollView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/green_main" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/choose_target_backgroud_icon"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/kinhte_switch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/khoa_kinh_te_desc" />
+
+                        <HorizontalScrollView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/khoa_kinhte_chip_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom_layout_rouded"
+                                app:singleLine="false"></com.google.android.material.chip.ChipGroup>
+                        </HorizontalScrollView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/green_main" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/choose_target_backgroud_icon"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/supham_switch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/khoa_su_pham_desc" />
+
+                        <HorizontalScrollView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/khoa_supham_chip_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bottom_layout_rouded"
+                                app:singleLine="false"></com.google.android.material.chip.ChipGroup>
+                        </HorizontalScrollView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/green_main" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@+id/mainLayout"
+            app:isVisible="@{viewModel.state().status == TwoDataViewState.Status.LOADING}"
+            app:layout_anchorGravity="center"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+

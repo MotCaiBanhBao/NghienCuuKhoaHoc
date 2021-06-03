@@ -50,11 +50,22 @@
         android:id="@+id/signInFragment"
         android:name="k12tt.luongvany.nghiencuukhoahoc.auth.SignInFragment"
         android:label="@string/app_name"
-        tool:layout="@layout/main_login" />
+        tool:layout="@layout/main_login">
+
+        <action
+            android:id="@+id/action_signInFragment_to_loginWithAccountFragment2"
+            app:destination="@id/loginWithAccountFragment" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/userDetailFragment"
         android:name="k12tt.luongvany.nghiencuukhoahoc.UserProfile"
         android:label="@string/user_detail"
         tool:layout="@layout/user_detail" />
+
+    <fragment
+        android:id="@+id/loginWithAccountFragment"
+        android:name="k12tt.luongvany.nghiencuukhoahoc.auth.SignInWithAccount"
+        tool:layout="@layout/login_fragment" />
 </navigation>

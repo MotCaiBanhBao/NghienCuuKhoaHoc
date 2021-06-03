@@ -4,14 +4,11 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.os.Bundle
-import android.text.Html
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.HtmlCompat
-import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -19,24 +16,34 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
 import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.squareup.picasso.Picasso
+import k12tt.luongvany.data.model.notification.NotificationData
+import k12tt.luongvany.domain.entities.Topics
 import k12tt.luongvany.nghiencuukhoahoc.databinding.ActivityMainBinding
-import k12tt.luongvany.nghiencuukhoahoc.notificationview.TOPIC
+import k12tt.luongvany.nghiencuukhoahoc.notificationview.SlideBar
 import k12tt.luongvany.nghiencuukhoahoc.utils.AppPreference
 import k12tt.luongvany.presentation.Router
 import k12tt.luongvany.presentation.auth.Auth
 import k12tt.luongvany.presentation.auth.AuthStateListener
+import k12tt.luongvany.presentation.viewmodel.notification.NotificationListViewModel
+import k12tt.luongvany.presentation.viewmodel.user.MainActivityViewModel
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import kotlin.coroutines.resumeWithException
 
 
 class MainActivity : AppCompatActivity() {
-
     private var currentNavController: LiveData<NavController>? = null
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainActivityViewModel by viewModel()
 
     val auth: Auth<Int, Intent> by inject { parametersOf(this@MainActivity) }
     val router: Router by inject { parametersOf(this@MainActivity) }
@@ -59,33 +66,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val context: ContextWrapper? = AppPreference.language?.let { Language.wrap(this@MainActivity , it) }
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        if (!auth.isLoggedIn()) {
+            binding.root.visibility = View.GONE
+        }
+        setContentView(binding.root)
+        Log.d("TEST", "MainOncreate")
+        val context: ContextWrapper? = AppPreference.language?.let { Language.wrap(this@MainActivity, it) }
         if (context != null) {
             resources.updateConfiguration(context.resources.configuration, context.resources.displayMetrics)
         }
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        createToken()
 
+        super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
+
     }
+
     override fun onStart() {
         super.onStart()
-        showUserImage()
-
-        binding.userPictureProfile.setOnClickListener{
-            router.showUserDetail()
-        }
+        Log.d("TEST", "onStart")
+        auth.addAuthChangeListener(authListener)
 
         setUpLanguageChoose()
-        auth.addAuthChangeListener(authListener)
+        createToken()
     }
 
     override fun onStop() {
         super.onStop()
+        Log.d("TEST", "MainOnStop")
         auth.removeAuthChangeListener(authListener)
     }
 
@@ -141,18 +152,21 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+    
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        
         if (requestCode == RC_GOOGLE_SIGN_IN) {
             try {
                 auth.handleSignInResult(data,
                     {
                         router.showNotificationsList()
-                        showUserImage()
-                    },
-                    {
+
+                    }, {
                         showErrorSignIn()
+                       },{
+                        startActivity(Intent(this, SlideBar::class.java))
                     })
             } catch (e: Exception) {
                 showErrorSignIn()
@@ -174,9 +188,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigationBar() {
-        val navGraphIds = listOf(R.navigation.nav_graph)
+        val navGraphIds = listOf(R.navigation.nav_graph, R.navigation.choose_target_nav, R.navigation.udck_detail_nav, R.navigation.my_notification_nav)
 
-        Log.d("TEST", "Co chay")
         val controller = binding.bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
@@ -199,28 +212,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createToken(){
+        viewModel.reSub()
         FirebaseMessaging.getInstance().token
             .addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     return@OnCompleteListener
                 }
-
                 val token = task.result
                 MyFirebaseMessagingService.token = token
-
                 val msg = getString(R.string.msg_token_fms, token)
                 Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
             })
 
+
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
     }
 
-    private fun showUserImage(){
-        Picasso.get().load(UserSingleTon.getUserPhotoUrl()).fit().centerCrop().into(binding.userPictureProfile)
-
-    }
 
     companion object {
+        const val TOPIC = "/topics/udck"
         const val RC_GOOGLE_SIGN_IN = 1
     }
 }

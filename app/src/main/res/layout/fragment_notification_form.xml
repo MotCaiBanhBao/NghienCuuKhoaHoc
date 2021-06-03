@@ -1,11 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="k12tt.luongvany.presentation.ViewState" />
+        <import type="k12tt.luongvany.presentation.binding.notification.NotificationTypeBinding" />
+
+        <variable
+            name="viewModel"
+            type="k12tt.luongvany.presentation.viewmodel.notification.NotificationFormViewModel" />
+
+        <variable
+            name="presenter"
+            type="k12tt.luongvany.nghiencuukhoahoc.notificationview.NotificationFormFragment" />
+
+    </data>
     <ScrollView
-        android:id="@+id/scrollView"
+        android:id="@+id/scroll"
+        android:fillViewport="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include
-            android:id="@+id/content"
-            layout="@layout/content_fragment_notification_form" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"
+                android:hint="@string/publisher_hint"
+                android:text="@={viewModel.notification().publisher}"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/content_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/content_hint"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"
+                android:text="@={viewModel.notification().content}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/url_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:hint="@string/detail_hint"
+                android:text="@={viewModel.notification().url}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/target_hint"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/choose_target_backgroud_icon"
+                    android:orientation="vertical">
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/kythuat_switch"
+                        android:text="@string/khoa_ky_thuat_desc"/>
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.chip.ChipGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/khoa_ky_thuat_chip_group"
+                            android:background="@drawable/bottom_layout_rouded">
+                        </com.google.android.material.chip.ChipGroup>
+                    </HorizontalScrollView>
+                    <View
+                        android:background="@color/green_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/choose_target_backgroud_icon"
+                    android:orientation="vertical">
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/kinhte_switch"
+                        android:text="@string/khoa_kinh_te_desc"/>
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.chip.ChipGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/khoa_kinhte_chip_group"
+                            app:singleLine="false"
+                            android:background="@drawable/bottom_layout_rouded">
+                        </com.google.android.material.chip.ChipGroup>
+                    </HorizontalScrollView>
+                    <View
+                        android:background="@color/green_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/choose_target_backgroud_icon"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/supham_switch"
+                        android:text="@string/khoa_su_pham_desc"/>
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.chip.ChipGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/khoa_supham_chip_group"
+                            app:singleLine="false"
+                            android:background="@drawable/bottom_layout_rouded">
+                        </com.google.android.material.chip.ChipGroup>
+                    </HorizontalScrollView>
+                    <View
+                        android:background="@color/green_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        <RadioGroup
+            android:id="@+id/rgMediaType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/thoikhoabieu_kind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.notification().notificationType == NotificationTypeBinding.THOIKHOABIEU}"
+                android:onCheckedChanged="@{(button, isChecked) -> viewModel.onTypeChanged(NotificationTypeBinding.THOIKHOABIEU, isChecked)}"
+                android:text="@string/thoikhoabieu_radiobutton" />
+
+            <RadioButton
+                android:id="@+id/thongbao_kind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.notification().notificationType == NotificationTypeBinding.THONGBAO}"
+                android:onCheckedChanged="@{(button, isChecked) -> viewModel.onTypeChanged(NotificationTypeBinding.THONGBAO, isChecked)}"
+                android:text="@string/thong_bao_radiobutton" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/push_button"
+            app:isVisible="@{viewModel.state().status != ViewState.Status.LOADING}" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleSmall"
+            isVisible="@{viewModel.state().status == ViewState.Status.LOADING}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     </ScrollView>
 </layout>

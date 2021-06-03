@@ -46,13 +46,6 @@
                         app:spinner_popup_animation="dropdown"
                         app:spinner_popup_background="@color/main_background"
                         app:spinner_popup_elevation="14dp"/>
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/user_picture_profile"
-                        android:layout_width="43dp"
-                        android:layout_height="43dp"
-                        android:layout_gravity="end"
-                        android:background="@drawable/user_profile"
-                        android:backgroundTint="@color/main_background" />
                 </LinearLayout>
 
             </com.google.android.material.appbar.MaterialToolbar>
@@ -64,11 +57,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-<!--            android:layout_marginStart="12dp"-->
-<!--            android:layout_marginTop="12dp"-->
-<!--            android:layout_marginEnd="12dp"-->
-<!--            android:layout_marginBottom="12dp"-->
-
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"

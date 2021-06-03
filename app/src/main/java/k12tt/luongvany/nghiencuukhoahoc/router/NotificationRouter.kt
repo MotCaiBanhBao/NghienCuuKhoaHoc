@@ -1,7 +1,11 @@
 package k12tt.luongvany.nghiencuukhoahoc.router
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
@@ -9,16 +13,19 @@ import androidx.navigation.Navigation
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import k12tt.luongvany.nghiencuukhoahoc.R
+import k12tt.luongvany.nghiencuukhoahoc.notificationview.NotificationDetailsFragment
+import k12tt.luongvany.nghiencuukhoahoc.notificationview.SlideBar
 import k12tt.luongvany.presentation.Router
-import k12tt.luongvany.presentation.binding.NotificationBinding
+import k12tt.luongvany.presentation.binding.notification.NotificationBinding
 
 class NotificationRouter(val activity: FragmentActivity): Router {
-
+    private val bottomNavigationView = activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+    private val parentAppBarLayout = activity.findViewById<AppBarLayout>(R.id.appBarLayout)
+    private val rootLayout = activity.findViewById<DrawerLayout>(R.id.drawer_layout)
 
     private val navController: NavController by lazy {
         Navigation.findNavController(activity, R.id.nav_host_container)
     }
-
 
     private val rootScreens = setOf(R.id.signInFragment, R.id.listNotification)
 
@@ -29,10 +36,10 @@ class NotificationRouter(val activity: FragmentActivity): Router {
             .setPopUpTo(R.id.signInFragment, false)
             .build()
         navController.navigate(R.id.signInFragment, null, options)
-
     }
 
     override fun showNotificationsList() {
+        showAppBarAndBottom(SHOW_ALL)
         navController.navigate(R.id.listNotification)
     }
 
@@ -58,7 +65,10 @@ class NotificationRouter(val activity: FragmentActivity): Router {
         val args = Bundle().apply {
             putParcelable("notification", notificationBinding)
         }
-        navController.navigate(R.id.notification_detail, args)
+        NotificationDetailsFragment().apply {
+            arguments = args
+        }.show(activity.supportFragmentManager, NotificationDetailsFragment.TAG)
+
     }
 
     override fun back() {
@@ -74,7 +84,6 @@ class NotificationRouter(val activity: FragmentActivity): Router {
     }
 
     override fun showUserDetail() {
-
         val navOptions = NavOptions.Builder().apply {
             setEnterAnim(R.anim.slide_in_left)
             setExitAnim(R.anim.slide_out_left)
@@ -85,7 +94,15 @@ class NotificationRouter(val activity: FragmentActivity): Router {
         navController.navigate(R.id.userDetailFragment, null, navOptions)
     }
 
-    private fun hideAppBarAndBottom(id: Int){
+    override fun showLoginWithAccount() {
+        val options = NavOptions.Builder()
+            .setPopUpTo(R.id.signInFragment, false)
+            .build()
+
+        navController.navigate(R.id.loginWithAccountFragment, null, options)
+    }
+
+     override fun hideAppBarAndBottom(id: Int){
         when(id){
             HIDE_BOT -> hideBot()
             HIDE_TOP -> hideAppBar()
@@ -96,19 +113,54 @@ class NotificationRouter(val activity: FragmentActivity): Router {
         }
 
     }
+
+    override fun showAppBarAndBottom(id: Int){
+        when(id){
+            SHOW_BOT -> showBot()
+            SHOW_TOP -> showAppBar()
+            else -> {
+                showBot()
+                showAppBar()
+            }
+        }
+
+    }
+
+    override fun showSlideBar(context: Context) {
+        context.startActivity(Intent(context, SlideBar::class.java))
+    }
+
+    override fun showView() {
+        rootLayout.visibility = View.VISIBLE
+    }
+
+
     private fun hideBot(){
-        val bottomNavigationView = activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        bottomNavigationView.visibility = View.GONE
+        if (bottomNavigationView.isVisible){
+            bottomNavigationView.visibility = View.GONE
+        }
     }
 
     private fun hideAppBar(){
-        val parentAppBarLayout = activity.findViewById<AppBarLayout>(R.id.appBarLayout)
-        parentAppBarLayout.setExpanded(false)
+        parentAppBarLayout.setExpanded(false, false)
+    }
+
+    private fun showBot(){
+        if (!bottomNavigationView.isVisible){
+            bottomNavigationView.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showAppBar(){
+            parentAppBarLayout.setExpanded(true, false)
     }
 
    companion object{
-        const val HIDE_TOP = 1
-        const val HIDE_BOT = 2
-        const val HIDE_ALL = 3
+       const val HIDE_TOP = 1
+       const val HIDE_BOT = 2
+       const val HIDE_ALL = 3
+       const val SHOW_TOP = 1
+       const val SHOW_BOT = 2
+       const val SHOW_ALL = 3
     }
 }

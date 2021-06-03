@@ -1,6 +1,7 @@
 package k12tt.luongvany.presentation
 
-import k12tt.luongvany.presentation.binding.NotificationBinding
+import android.content.Context
+import k12tt.luongvany.presentation.binding.notification.NotificationBinding
 
 interface Router {
     fun showLogin()
@@ -11,4 +12,9 @@ interface Router {
     fun navigationUp(): Boolean
     fun isInRootScreen(): Boolean
     fun showUserDetail()
+    fun showLoginWithAccount()
+    fun hideAppBarAndBottom(id: Int)
+    fun showAppBarAndBottom(id: Int)
+    fun showSlideBar(context: Context)
+    fun showView()
 }

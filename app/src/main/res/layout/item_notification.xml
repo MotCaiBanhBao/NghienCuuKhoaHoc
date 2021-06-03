@@ -4,11 +4,11 @@
     <data>
         <variable
             name="viewModel"
-            type="k12tt.luongvany.presentation.NotificationListViewModel"/>
+            type="k12tt.luongvany.presentation.viewmodel.notification.NotificationListViewModel"/>
 
         <variable
             name="notification"
-            type="k12tt.luongvany.presentation.binding.NotificationBinding"/>
+            type="k12tt.luongvany.presentation.binding.notification.NotificationBinding"/>
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -23,7 +23,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/notification_item_background"
+            android:background="@drawable/notification_default"
             android:padding="8dp">
 
             <TextView

@@ -3,7 +3,7 @@ package k12tt.luongvany.nghiencuukhoahoc.binding
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import k12tt.luongvany.nghiencuukhoahoc.R
-import k12tt.luongvany.presentation.binding.NotificationTypeBinding
+import k12tt.luongvany.presentation.binding.notification.NotificationTypeBinding
 
 object TextBinding {
     @JvmStatic

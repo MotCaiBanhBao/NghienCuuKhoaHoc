@@ -1,11 +1,20 @@
 package k12tt.luongvany.data.source
 
-import k12tt.luongvany.data.model.NotificationData
-import k12tt.luongvany.domain.entities.Notification
+import k12tt.luongvany.data.model.notification.NotificationData
+import k12tt.luongvany.data.model.topic.TopicsData
+import k12tt.luongvany.data.model.user.UserData
+import k12tt.luongvany.domain.entities.Topics
 import kotlinx.coroutines.flow.Flow
 
 interface FBData {
     fun loadNotifications(): Flow<List<NotificationData>>
     fun loadNotification(notificationId: String): Flow<NotificationData?>
-    suspend fun pushNotification(notification: NotificationData)
+    suspend fun pushNotification(notification: NotificationData, topics: List<TopicsData>)
+    suspend fun initUser(topics: List<TopicsData>)
+    fun getUser(userId: String): Flow<UserData?>
+    fun getTopic(): Flow<List<TopicsData>>
+    fun getUserTopics():Flow<List<TopicsData>>
+    fun getUserNotification(): Flow<List<NotificationData>>
+    suspend fun reSubcribe()
+    suspend fun changeTopic(topics: List<TopicsData>, oldTopics: List<TopicsData>)
 }

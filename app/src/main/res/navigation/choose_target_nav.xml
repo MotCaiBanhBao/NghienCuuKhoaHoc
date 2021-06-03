@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/choose_target_send"
+    app:startDestination="@+id/choose_target_first_des">
+    <fragment
+        android:id="@+id/choose_target_first_des"
+        android:label="Choose"
+        android:name="k12tt.luongvany.nghiencuukhoahoc.notificationview.ChooseTargetFragment"
+        tool:layout="@layout/select_target_layout">
+    </fragment>
+</navigation>

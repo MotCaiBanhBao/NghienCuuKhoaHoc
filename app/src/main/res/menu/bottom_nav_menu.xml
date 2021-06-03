@@ -8,10 +8,10 @@
         android:title="@string/home_page_label"/>
 
     <item
-        android:id="@+id/message_page"
-        android:icon="@drawable/ic_message_page"
+        android:id="@+id/choose_target_send"
+        android:icon="@drawable/ic_add"
         android:enabled="true"
-        android:title="@string/message_page_label"/>
+        android:title="@string/choose_target_page_label"/>
 
     <item
         android:id="@+id/udck_detail_page"
@@ -20,7 +20,7 @@
         android:title="@string/udck_detail_label"/>
     <item
         android:id="@+id/notification_page"
-        android:icon="@drawable/ic_notification_page"
+        android:icon="@drawable/user_icon"
         android:enabled="true"
-        android:title="@string/notification_page_label"/>
+        android:title="User"/>
 </menu>

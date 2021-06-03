@@ -7,7 +7,9 @@ abstract class Auth<Input, Result>{
 
     abstract fun startSignIn(authInfo: Input? = null)
 
-    abstract fun handleSignInResult(result: Result?, onSuccess: () -> Unit, onError: () -> Unit)
+    abstract fun startSignInWithEmail(userName: String, password: String, onSuccess: () -> Unit, onFirstLogin: () -> Unit)
+
+    abstract fun handleSignInResult(result: Result?, onSuccess: () -> Unit, onError: () -> Unit, onFirstLogin: () -> Unit)
 
     fun addAuthChangeListener(listener: AuthStateListener) {
         callbacks.add(listener)
@@ -22,4 +24,9 @@ abstract class Auth<Input, Result>{
     }
 
     abstract fun signOut()
+
+    companion object{
+        const val GOOGLE_AUTH = "1"
+        const val EMAIL_AUTH = "2"
+    }
 }

@@ -1,18 +1,20 @@
 package k12tt.luongvany.nghiencuukhoahoc.notificationview
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import k12tt.luongvany.nghiencuukhoahoc.R
 import k12tt.luongvany.nghiencuukhoahoc.common.BaseFragment
 import k12tt.luongvany.nghiencuukhoahoc.databinding.FragmentNotificationListBinding
-import k12tt.luongvany.presentation.NotificationListViewModel
+import k12tt.luongvany.presentation.viewmodel.notification.NotificationListViewModel
 import k12tt.luongvany.presentation.ViewState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -52,6 +54,13 @@ class NotificationListFragment: BaseFragment() {
             initFab()
         }
 
+        dataBinding.chipGroup.setOnCheckedChangeListener{group, checkedId ->
+            when(checkedId){
+                R.id.chip_all -> notificationAdapter.filter.filter("TATCA")
+                R.id.chip_tb -> notificationAdapter.filter.filter("THONGBAO")
+                R.id.chip_tkb -> notificationAdapter.filter.filter("THOIKHOABIEU")
+            }
+        }
         return dataBinding.root
     }
 
@@ -71,41 +80,27 @@ class NotificationListFragment: BaseFragment() {
                 }
             }
         })
-
         lifecycle.addObserver(viewModel)
     }
 
     private fun initRecyclerView() {
         dataBinding.rvNotifications.adapter = notificationAdapter
-        attachSwipeToRecyclerView()
     }
 
     private fun initFab() {
         dataBinding.sendNoti.setOnClickListener {
-            router.showNotificationForm(null)
-        }
-    }
-
-    private fun attachSwipeToRecyclerView() {
-        val swipe = object : ItemTouchHelper.SimpleCallback(
-            0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(
-                viewHolder: RecyclerView.ViewHolder,
-                direction: Int
-            ) {
+            val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+            val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+            if (isConnected)
+                router.showNotificationForm(null)
+            else{
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Bạn không có kết nối Internet, làm ơn kết nối Internet trước khi dùng chức năng này")
+                    .setTitle("Lỗi")
+                    .setPositiveButton("Đã hiểu", null)
+                    .show()
             }
         }
-        val itemTouchHelper = ItemTouchHelper(swipe)
-        itemTouchHelper.attachToRecyclerView(dataBinding.rvNotifications)
     }
-
-
 }

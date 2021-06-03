@@ -1,37 +1,31 @@
 package k12tt.luongvany.data_fb
 
-import android.app.AlertDialog
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Build
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.google.android.gms.tasks.Task
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ServerTimestamp
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.storage.FirebaseStorage
-import k12tt.luongvany.data.model.NotificationData
+import com.google.firebase.messaging.FirebaseMessaging
+import k12tt.luongvany.data.model.notification.NotificationData
+import k12tt.luongvany.data.model.topic.TopicsData
+import k12tt.luongvany.data.model.user.UserData
 import k12tt.luongvany.data.source.FBData
 import k12tt.luongvany.data_fb.entities.PushNotification
 import k12tt.luongvany.data_fb.util.toPushNotification
+import k12tt.luongvany.domain.entities.Topics
+import k12tt.luongvany.domain.entities.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
 import java.lang.Exception
 import java.util.*
-import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
@@ -39,14 +33,12 @@ import kotlin.coroutines.suspendCoroutine
 internal class FBDataImpl : FBData{
     private val fbAuth = FirebaseAuth.getInstance()
     private val fireStore = FirebaseFirestore.getInstance()
-    private val storageRef = FirebaseStorage.getInstance().reference.child(NOTIFICATION_KEY)
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun loadNotifications(): Flow<List<NotificationData>> {
-
         return callbackFlow {
-            val subscription = fireStore.collection(NOTIFICATION_KEY).orderBy("timestamp")
-                .addSnapshotListener{ snapshot, e ->
+            val subscription = fireStore.collection(NOTIFICATION_KEY)
+                .orderBy("timestamp").addSnapshotListener{ snapshot, e ->
                     if(e != null){
                         Timestamp(123L, 0)
                         return@addSnapshotListener
@@ -57,11 +49,34 @@ internal class FBDataImpl : FBData{
                         }
                         offer(notifications)
                     }
-
                     else{
                         offer(emptyList<NotificationData>())
                     }
+                }
+            awaitClose{
+                subscription.remove()
+            }
+        }
+    }
 
+    override fun getUserNotification(): Flow<List<NotificationData>> {
+        return callbackFlow {
+            val currentUser = fbAuth.currentUser
+            val subscription = fireStore.collection("user").document(currentUser.uid).collection("notifications")
+                .orderBy("timestamp").addSnapshotListener{ snapshot, e ->
+                    if(e != null){
+                        Timestamp(123L, 0)
+                        return@addSnapshotListener
+                    }
+                    if(snapshot != null && !snapshot.isEmpty){
+                        val notifications = snapshot.map {document ->
+                            document.toObject(NotificationData::class.java)
+                        }
+                        offer(notifications)
+                    }
+                    else{
+                        offer(emptyList<NotificationData>())
+                    }
                 }
             awaitClose{
                 subscription.remove()
@@ -81,8 +96,8 @@ internal class FBDataImpl : FBData{
                     if (snapshot != null && snapshot.exists()) {
                         val notification = snapshot.toObject(NotificationData::class.java)
                         notification?.let {
-                        offer(it)
-                    }
+                            offer(it)
+                        }
                     }else{
                         offer(null)
                     }
@@ -91,7 +106,53 @@ internal class FBDataImpl : FBData{
         }
     }
 
-    override suspend fun pushNotification(notification: NotificationData) {
+    override suspend fun changeTopic(topics: List<TopicsData>, oldTopics: List<TopicsData>) {
+        return suspendCoroutine { continuation ->
+            val currentUser = fbAuth.currentUser
+            if (currentUser == null){
+                continuation.resumeWithException(RuntimeException("Unauthorized used."))
+            }else{
+                val db = fireStore
+                val collection = db.collection(NOTIFICATION_USER).document(currentUser.uid).collection(USER_TOPIC)
+
+                for(topicsItem in topics){
+                    collection.document(topicsItem.name).delete()
+                    for(item in topicsItem.topics){
+                        collection.document(topicsItem.name).set(item, SetOptions.merge())
+                    }
+                }
+                unSub(oldTopics)
+                subcribeTopic(topics)
+            }
+        }
+    }
+
+    private fun unSub(topics: List<TopicsData>) = CoroutineScope(Dispatchers.IO).launch{
+        try {
+            val firebaseMassaging = FirebaseMessaging.getInstance()
+            for (topic in topics){
+                for (item in topic.topics)
+                    firebaseMassaging.unsubscribeFromTopic(item.values.toString().removePrefix("[").removeSuffix("]"))
+            }
+        }catch (e: Exception){
+            Log.e(TAG, e.toString())
+        }
+    }
+
+    private fun subcribeTopic(topics: List<TopicsData>) = CoroutineScope(Dispatchers.IO).launch{
+        try {
+            val firebaseMassaging = FirebaseMessaging.getInstance()
+            for (topic in topics){
+                for(item in topic.topics){
+                    firebaseMassaging.subscribeToTopic(item.values.toString().removePrefix("[").removeSuffix("]"))
+                }
+            }
+        }catch (e: Exception){
+            Log.e(TAG, e.toString())
+        }
+    }
+
+    override suspend fun pushNotification(notification: NotificationData, topics: List<TopicsData>) {
         return suspendCoroutine { continuation ->
             val currentUser = fbAuth.currentUser
 
@@ -100,6 +161,12 @@ internal class FBDataImpl : FBData{
             }else{
                 val db = fireStore
                 val collection = db.collection(NOTIFICATION_KEY)
+                for (topic in topics){
+                    for (item in topic.topics){
+                        notification.target += item.keys.toString().removePrefix("[").removeSuffix("]") + " "
+                    }
+                }
+                Log.d("TEST", notification.target)
                 val pushTask = if(notification.id.isBlank()){
                     collection.add(notification).continueWithTask{ task ->
                         val doc = task.result
@@ -112,7 +179,11 @@ internal class FBDataImpl : FBData{
 
                 pushTask.continueWith{ task ->
                     if(task.isSuccessful){
-                        sendNotification(notification.toPushNotification(TOPIC))
+                        for(topic in topics){
+                            for (item in topic.topics){
+                                sendNotification(notification.toPushNotification(item.values.toString().removePrefix("[").removeSuffix("]")))
+                            }
+                        }
                     }
                     else{
                         continuation.resumeWithException(RuntimeException("Fail to put notification"))
@@ -135,43 +206,132 @@ internal class FBDataImpl : FBData{
         }
     }
 
-    private fun uploadPhoto(notification: NotificationData): Task<Uri> {
-        notification.image?.let { compressPhoto(it) }
-        val storageRef = storageRef.child(notification.id)
-        return storageRef.putFile(Uri.parse(notification.image))
-            .continueWithTask { uploadTask ->
-                uploadTask.result?.storage?.downloadUrl
+    override suspend fun initUser(topics: List<TopicsData>) {
+        return suspendCoroutine { continuation ->
+            val db = fireStore
+            val currentUser = fbAuth.currentUser
+            if(currentUser == null){
+                continuation.resumeWithException(RuntimeException("Đăng nhập lỗi"))
+            }else{
+                val userData = User(currentUser.uid, currentUser.displayName, currentUser.email, fbAuth.languageCode, false)
+                db.collection(NOTIFICATION_USER).document(userData.uid).set(userData).addOnFailureListener{ e->
+                    continuation.resumeWithException(RuntimeException("Can create user", e))
+                }.addOnSuccessListener {
+                    val path = db.collection(NOTIFICATION_USER).document(userData.uid).collection(USER_TOPIC)
+                    for(topic in topics){
+                        path.document(topic.name).set(topic.topics)
+                    }
+                }
             }
-    }
 
-    private fun compressPhoto(path: String) {
-        val imgFile = File(path.substringAfter("file://"))
-        val bos = ByteArrayOutputStream()
-        val bmp = BitmapFactory.decodeFile(imgFile.absolutePath)
-        bmp.compress(Bitmap.CompressFormat.JPEG, 70, bos)
-        val fos = FileOutputStream(imgFile)
-        fos.write(bos.toByteArray())
-        fos.flush()
-        fos.close()
-    }
-
-    private fun uploadFile(notification: NotificationData) {
-        uploadPhoto(notification).continueWithTask { urlTask ->
-            File(notification.image).delete()
-            notification.image = urlTask.result.toString()
-            fireStore.collection(NOTIFICATION_KEY)
-                .document(notification.id)
-                .update(IMAGE_URL_KEY, notification.image)
-        }.addOnFailureListener {
-            throw RuntimeException("Fail to upload.")
         }
+    }
+
+    override fun getUser(userId: String): Flow<UserData?> {
+        return callbackFlow {
+            val subscription = fireStore.collection(USER_ID_KEY)
+                .document(userId)
+                .addSnapshotListener{ snapshot, e ->
+                    if (e != null){
+                        close(e)
+                        return@addSnapshotListener
+                    }
+                    if (snapshot != null && snapshot.exists()) {
+                        val userData = snapshot.toObject(UserData::class.java)
+                        userData?.let {
+                            offer(it)
+                        }
+                    }else{
+                        offer(null)
+                    }
+                }
+            awaitClose{subscription.remove()}
+        }
+    }
+
+    override fun getTopic(): Flow<List<TopicsData>> {
+        return callbackFlow {
+            val subscription = fireStore.collection(USER_TOPIC).addSnapshotListener{ snapshot, e ->
+                if(e != null){
+                    Timestamp(123L, 0)
+                    return@addSnapshotListener
+                }
+                if(snapshot != null && !snapshot.isEmpty){
+                    val topics = snapshot.map { document ->
+                        TopicsData(document.id).apply {
+                            for (item in document.data){
+                                topics.add(mapOf(item.key to item.value.toString()))
+
+                            }
+                        }
+                    }
+                    offer(topics)
+                }
+                else{
+                    offer(emptyList<TopicsData>())
+                }
+            }
+            awaitClose{
+                subscription.remove()
+            }
+        }
+    }
+
+    override fun getUserTopics(): Flow<List<TopicsData>> {
+        return callbackFlow {
+            val currentUser = fbAuth.currentUser
+            val subscription = fireStore.collection(NOTIFICATION_USER).document(currentUser.uid).collection(USER_TOPIC).addSnapshotListener(){ snapshot, e ->
+                if(e != null){
+                    Timestamp(123L, 0)
+                    return@addSnapshotListener
+                }
+                if(snapshot != null && !snapshot.isEmpty){
+                    val topics = snapshot.map { document ->
+                        TopicsData(document.id).apply {
+                            for (item in document.data){
+                                topics.add(mapOf(item.key to item.value as String))
+                            }
+                        }
+                    }
+                    offer(topics)
+                }
+                else{
+                    offer(emptyList<TopicsData>())
+                }
+            }
+            awaitClose{
+                subscription.remove()
+            }
+        }
+    }
+
+    override suspend fun reSubcribe() {
+        val currentUser = fbAuth.currentUser
+        fireStore.collection(NOTIFICATION_USER).document(currentUser.uid).collection(USER_TOPIC).addSnapshotListener(){ snapshot, e ->
+            if(e != null){
+                Timestamp(123L, 0)
+                return@addSnapshotListener
+            }
+            if(snapshot != null && !snapshot.isEmpty){
+                val topics = snapshot.map { document ->
+                    TopicsData(document.id).apply {
+                        for (item in document.data){
+                            topics.add(mapOf(item.key to item.value as String))
+                        }
+                    }
+                }
+                subcribeTopic(topics)
+            }
+        }
+
     }
 
     companion object {
         const val NOTIFICATION_KEY = "notifications"
+        const val NOTIFICATION_USER = "users"
+        const val USER_TOPIC = "topics"
         const val USER_ID_KEY = "userId"
         const val ID_KEY = "id"
-        const val IMAGE_URL_KEY = "image"
         const val TAG = "NOTIFICATION"
         const val TOPIC = "/topics/myTopic2"
     }
