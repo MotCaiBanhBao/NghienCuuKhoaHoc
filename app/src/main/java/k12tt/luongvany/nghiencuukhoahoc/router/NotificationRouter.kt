@@ -29,7 +29,6 @@ class NotificationRouter(val activity: FragmentActivity): Router {
 
     private val rootScreens = setOf(R.id.signInFragment, R.id.listNotification)
 
-
     override fun showLogin() {
         val options = NavOptions.Builder()
             .setLaunchSingleTop(true)
@@ -68,7 +67,6 @@ class NotificationRouter(val activity: FragmentActivity): Router {
         NotificationDetailsFragment().apply {
             arguments = args
         }.show(activity.supportFragmentManager, NotificationDetailsFragment.TAG)
-
     }
 
     override fun back() {

@@ -58,7 +58,6 @@ class UserNotificationListFragment: BaseFragment() {
         init()
     }
 
-
     private fun init() {
         viewModel.state().observe(viewLifecycleOwner, Observer { viewState ->
             viewState?.let {

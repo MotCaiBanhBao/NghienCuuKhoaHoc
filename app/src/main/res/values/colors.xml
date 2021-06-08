@@ -5,6 +5,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#CDCDCD</color>
 
     <color name="main_background">#FCF8F3</color>
     <color name="green_main">#698375</color>

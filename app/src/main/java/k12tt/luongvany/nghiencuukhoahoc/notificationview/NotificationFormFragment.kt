@@ -65,10 +65,12 @@ class NotificationFormFragment : BaseFragment(){
 
     override fun onStart() {
         super.onStart()
+
         dataBinding.btnSave.setOnClickListener {
             viewModel.saveNotification(topics = convertToData())
         }
     }
+
 
     private fun init() {
         viewModel.stateData().observe(viewLifecycleOwner, Observer { event ->
@@ -92,7 +94,6 @@ class NotificationFormFragment : BaseFragment(){
                     ViewState.Status.SUCCESS -> {
                         showMessageSuccess()
                         Log.d(TAG, "SUCCESS")
-                        router.back()
                     }
                     ViewState.Status.ERROR -> {
                         showErrorMessage(R.string.send_notification_error)

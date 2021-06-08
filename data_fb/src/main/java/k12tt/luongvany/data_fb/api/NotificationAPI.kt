@@ -15,4 +15,5 @@ interface NotificationAPI{
     suspend fun postNotification(
         @Body notification: PushNotification
     ): Response<ResponseBody>
+
 }

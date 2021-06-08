@@ -20,7 +20,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class NotificationDetailsFragment: BottomSheetDialogFragment() {
-    private lateinit var bottomNavigationView: BottomNavigationView
 
     private val viewModel: NotificationDetailsViewModel by viewModel {
         parametersOf(arguments?.getParcelable<NotificationBinding>(EXTRA_NOTIFICATION)?.id)
@@ -41,7 +40,6 @@ class NotificationDetailsFragment: BottomSheetDialogFragment() {
             viewModel = this@NotificationDetailsFragment.viewModel
             root
         }
-
     }
 
     companion object {

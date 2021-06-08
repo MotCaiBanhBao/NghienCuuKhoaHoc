@@ -1,6 +1,8 @@
 package k12tt.luongvany.nghiencuukhoahoc.notificationview
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import k12tt.luongvany.nghiencuukhoahoc.R
 import k12tt.luongvany.nghiencuukhoahoc.binding.RecyclerViewBinding
 import k12tt.luongvany.nghiencuukhoahoc.databinding.ItemNotificationBinding
+import k12tt.luongvany.nghiencuukhoahoc.databinding.MyNotifiactionItemBinding
 import k12tt.luongvany.presentation.binding.notification.NotificationBinding
 import k12tt.luongvany.presentation.binding.notification.NotificationTypeBinding
 
@@ -30,10 +33,11 @@ class UserNotificationAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_notification, parent, false)
+            .inflate(R.layout.my_notifiaction_item, parent, false)
         return ViewHolder(view)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding?.apply {
             notifications?.get(position)?.let { currentNotification ->
@@ -42,16 +46,13 @@ class UserNotificationAdapter(
                 root.setOnClickListener {
                     onClick(currentNotification)
                 }
-                root.findViewById<ImageButton>(R.id.share_notification).setOnClickListener{
-                    shareNotification(currentNotification)
-                }
             }
         }
     }
     override fun getItemCount() = notifications?.size ?: 0
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = DataBindingUtil.bind<ItemNotificationBinding>(view)
+        val binding = DataBindingUtil.bind<MyNotifiactionItemBinding>(view)
     }
 
     private fun shareNotification(notification: NotificationBinding){

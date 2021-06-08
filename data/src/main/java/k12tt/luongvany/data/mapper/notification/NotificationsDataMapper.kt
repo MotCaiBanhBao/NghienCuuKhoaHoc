@@ -13,6 +13,7 @@ class NotificationsDataMapper : Mapper<Notification, NotificationData> {
             content = source.content,
             url = source.url,
             publisher = source.publisher,
+            _title = source.title,
             image = source.image,
             notificationType = mapNotificationType(source.notificationType),
             checked = source.checked,

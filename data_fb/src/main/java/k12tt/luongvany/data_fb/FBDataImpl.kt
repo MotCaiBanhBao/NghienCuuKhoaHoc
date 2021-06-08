@@ -6,12 +6,15 @@ import androidx.annotation.RequiresApi
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.Gson
 import k12tt.luongvany.data.model.notification.NotificationData
 import k12tt.luongvany.data.model.topic.TopicsData
 import k12tt.luongvany.data.model.user.UserData
 import k12tt.luongvany.data.source.FBData
+import k12tt.luongvany.data_fb.api.NotificationAPI
 import k12tt.luongvany.data_fb.entities.PushNotification
 import k12tt.luongvany.data_fb.util.toPushNotification
 import k12tt.luongvany.domain.entities.Topics
@@ -26,6 +29,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.util.*
+import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
@@ -37,8 +41,7 @@ internal class FBDataImpl : FBData{
     @RequiresApi(Build.VERSION_CODES.O)
     override fun loadNotifications(): Flow<List<NotificationData>> {
         return callbackFlow {
-            val subscription = fireStore.collection(NOTIFICATION_KEY)
-                .orderBy("timestamp").addSnapshotListener{ snapshot, e ->
+            val subscription = fireStore.collection(NOTIFICATION_KEY).orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener{ snapshot, e ->
                     if(e != null){
                         Timestamp(123L, 0)
                         return@addSnapshotListener
@@ -61,8 +64,9 @@ internal class FBDataImpl : FBData{
 
     override fun getUserNotification(): Flow<List<NotificationData>> {
         return callbackFlow {
+
             val currentUser = fbAuth.currentUser
-            val subscription = fireStore.collection("user").document(currentUser.uid).collection("notifications")
+            val subscription = fireStore.collection(NOTIFICATION_USER).document(currentUser.uid).collection("notifications")
                 .orderBy("timestamp").addSnapshotListener{ snapshot, e ->
                     if(e != null){
                         Timestamp(123L, 0)
@@ -70,6 +74,7 @@ internal class FBDataImpl : FBData{
                     }
                     if(snapshot != null && !snapshot.isEmpty){
                         val notifications = snapshot.map {document ->
+                            Log.d("Test", document.toString())
                             document.toObject(NotificationData::class.java)
                         }
                         offer(notifications)
@@ -114,7 +119,6 @@ internal class FBDataImpl : FBData{
             }else{
                 val db = fireStore
                 val collection = db.collection(NOTIFICATION_USER).document(currentUser.uid).collection(USER_TOPIC)
-
                 for(topicsItem in topics){
                     collection.document(topicsItem.name).delete()
                     for(item in topicsItem.topics){
@@ -123,6 +127,7 @@ internal class FBDataImpl : FBData{
                 }
                 unSub(oldTopics)
                 subcribeTopic(topics)
+                continuation.resume(Unit)
             }
         }
     }
@@ -177,27 +182,31 @@ internal class FBDataImpl : FBData{
                   collection.document(notification.id).set(notification, SetOptions.merge())
                 }
 
-                pushTask.continueWith{ task ->
+                pushTask
+                    .continueWith{ task ->
                     if(task.isSuccessful){
                         for(topic in topics){
                             for (item in topic.topics){
                                 sendNotification(notification.toPushNotification(item.values.toString().removePrefix("[").removeSuffix("]")))
                             }
                         }
-                    }
-                    else{
+                    } else{
                         continuation.resumeWithException(RuntimeException("Fail to put notification"))
                     }
+                    }
+                    .addOnSuccessListener { continuation.resume(Unit) }
+                    .addOnFailureListener { e -> continuation.resumeWithException(e) }
+
+
                 }
             }
         }
-    }
 
     private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch{
         try {
             val response = RetrofitInstance.api.postNotification(notification)
             if (response.isSuccessful){
-                Log.d(TAG, "Response: $response")
+                Log.d(TAG, "Response: ${response.raw()}")
             }else{
                 Log.e(TAG, "Lỗi" + response.errorBody().toString())
             }

@@ -24,6 +24,7 @@ object NotificationConverter {
             id = notification.id,
             content = notification.content,
             _url = notification.url,
+            _title = notification.title,
             image = notification.image,
             checked = notification.checked,
             publisher = notification.publisher,

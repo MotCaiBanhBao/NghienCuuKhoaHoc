@@ -75,6 +75,5 @@
             app:isVisible="@{viewModel.state().status == ViewState.Status.LOADING}"
             app:layout_anchor="@+id/rvNotifications"
             app:layout_anchorGravity="center" />
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -14,12 +14,14 @@ data class NotificationData(
     var pdfFile: String? ="",
     var notificationType: NotificationTypeData = NotificationTypeData.THONGBAO,
     var target: String = "",
+    val _title: String = "",
     var checked: Boolean = false,
 ){
     @ServerTimestamp
     var timestamp: Date = Timestamp.now().toDate()
         private set
 
-    var title: String = ""
-        get() = if(field == "") "$publisher thông báo đến $target" else field
+    val title: String
+        get() = if(_title.trim() == "") "$publisher thông báo đến $target" else _title
+
 }

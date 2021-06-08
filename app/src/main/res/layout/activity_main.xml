@@ -47,9 +47,7 @@
                         app:spinner_popup_background="@color/main_background"
                         app:spinner_popup_elevation="14dp"/>
                 </LinearLayout>
-
             </com.google.android.material.appbar.MaterialToolbar>
-
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.fragment.app.FragmentContainerView

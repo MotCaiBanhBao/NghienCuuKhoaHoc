@@ -24,7 +24,7 @@ import java.util.*
 private const val CHANNEL_ID = "my_channel"
 class MyFirebaseMessagingService : FirebaseMessagingService(){
         companion object {
-            var sharedPref: SharedPreferences? = null
+            private var sharedPref: SharedPreferences? = null
 
             var token: String?
                 get() {
@@ -50,9 +50,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
             val fireStore = FirebaseFirestore.getInstance()
             val db = fireStore
             val collection = db.collection("users").document(fbAuth.currentUser.uid).collection("notifications")
-
-            collection.add(NotificationData(content =  message.data["message"]?:"Null").apply {
-                title = message.data["title"].toString()
+            collection.document(message.data["id"].toString()).set(NotificationData(content = message.data["message"]?:"Null",  _title = message.data["title"].toString()).apply {
+                id = message.data["id"].toString()
             })
 
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -68,8 +67,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .build()
-
             notificationManager.notify(notificationID, notification)
+
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
@@ -82,5 +81,5 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
             }
             notificationManager.createNotificationChannel(channel)
         }
+}
 
-    }

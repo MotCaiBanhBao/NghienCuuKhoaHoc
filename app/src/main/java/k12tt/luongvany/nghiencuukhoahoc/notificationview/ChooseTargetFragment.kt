@@ -16,6 +16,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
+import com.google.android.material.snackbar.Snackbar
 import k12tt.luongvany.domain.entities.Topics
 import k12tt.luongvany.nghiencuukhoahoc.MainActivity
 import k12tt.luongvany.nghiencuukhoahoc.R
@@ -63,7 +64,10 @@ class ChooseTargetFragment: DialogFragment() {
     }
 
     private fun showMessageSuccess() {
-        Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+        AlertDialog.Builder(requireContext())
+            .setTitle("Thành công")
+            .setMessage("")
+            .show()
     }
 
     private fun showErrorMessage() {
