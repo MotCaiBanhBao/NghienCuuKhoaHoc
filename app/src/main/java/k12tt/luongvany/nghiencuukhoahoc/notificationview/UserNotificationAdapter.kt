@@ -12,11 +12,16 @@ import android.widget.Filterable
 import android.widget.ImageButton
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import k12tt.luongvany.data.model.notification.NotificationData
 import k12tt.luongvany.nghiencuukhoahoc.R
 import k12tt.luongvany.nghiencuukhoahoc.binding.RecyclerViewBinding
 import k12tt.luongvany.nghiencuukhoahoc.databinding.ItemNotificationBinding
 import k12tt.luongvany.nghiencuukhoahoc.databinding.MyNotifiactionItemBinding
 import k12tt.luongvany.presentation.binding.notification.NotificationBinding
+import k12tt.luongvany.presentation.binding.notification.NotificationConverter
 import k12tt.luongvany.presentation.binding.notification.NotificationTypeBinding
 
 class UserNotificationAdapter(
@@ -44,6 +49,14 @@ class UserNotificationAdapter(
                 notification = currentNotification
                 executePendingBindings()
                 root.setOnClickListener {
+                    if (!currentNotification.checked){
+                        currentNotification.checked = true
+                        val fbAuth = FirebaseAuth.getInstance()
+                        val fireStore = FirebaseFirestore.getInstance()
+                        val db = fireStore
+                        val collection = db.collection("users").document(fbAuth.currentUser.uid).collection("notifications")
+                        collection.document(currentNotification.id).set(hashMapOf("checked" to true), SetOptions.merge())
+                    }
                     onClick(currentNotification)
                 }
             }

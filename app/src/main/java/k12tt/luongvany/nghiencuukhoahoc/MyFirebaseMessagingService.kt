@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.google.firebase.messaging.ktx.remoteMessage
 import k12tt.luongvany.data.model.notification.NotificationData
 import java.util.*
 
@@ -40,6 +41,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
             token = newToken
         }
 
+        @RequiresApi(Build.VERSION_CODES.M)
         override fun onMessageReceived(message: RemoteMessage) {
             super.onMessageReceived(message)
 
@@ -50,14 +52,16 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
             val fireStore = FirebaseFirestore.getInstance()
             val db = fireStore
             val collection = db.collection("users").document(fbAuth.currentUser.uid).collection("notifications")
-            collection.document(message.data["id"].toString()).set(NotificationData(content = message.data["message"]?:"Null",  _title = message.data["title"].toString()).apply {
+            collection.document(message.data["id"].toString()).set(NotificationData(content = message.data["message"]?:"Null").apply {
+                title = message.data["title"].toString()
                 id = message.data["id"].toString()
+                target = message.data["target"].toString()
+                publisher = message.data["publisher"].toString()
             })
-
+            Log.d("TEST", message.notification?.tag.toString())
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 createNotificationChannel(notificationManager)
             }
-
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
             val notification = NotificationCompat.Builder(this, CHANNEL_ID)
@@ -67,8 +71,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .build()
-            notificationManager.notify(notificationID, notification)
 
+            notificationManager.notify(message.data["id"].toString(), 1, notification)
         }
 
         @RequiresApi(Build.VERSION_CODES.O)

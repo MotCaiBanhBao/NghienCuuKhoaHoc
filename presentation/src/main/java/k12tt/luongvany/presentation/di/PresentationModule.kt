@@ -19,7 +19,7 @@ object PresentationModule {
             }
 
             viewModel {
-                (notificationId: String) -> NotificationDetailsViewModel(notificationId, get())
+                (notificationId: String) -> NotificationDetailsViewModel(notificationId, get(), get(), get())
             }
 
             viewModel {

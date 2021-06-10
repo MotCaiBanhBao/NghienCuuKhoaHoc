@@ -7,7 +7,6 @@ data class Notification(
     var id: String = "",
     var content: String = "",
     val _url: String? = "",
-    val _title: String = "",
     var publisher: String?,
     var image: String? = "",
     var notificationType: NotificationType = NotificationType.THONGBAO,
@@ -15,9 +14,8 @@ data class Notification(
     var checked: Boolean = false,
     var timestamp: Date = Date()
 ){
-    val title: String
-        get() = if(_title.trim() == "") "$publisher thông báo đến $target" else _title
+    val title: String = ""
+        get() = if(field == "") "$publisher thông báo đến $target" else field
     val url: String
-        get() = if (_url?.isEmpty() == true) "" else "Xem chi tiết tại: $_url"
-
+        get() = if(_url=="") "" else "Xem chi tiết tại: $_url"
 }

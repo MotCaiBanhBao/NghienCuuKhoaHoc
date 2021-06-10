@@ -16,8 +16,8 @@ class Language(base: Context?) : ContextWrapper(base) {
         const val CAMBODIA = "km"
 
         fun wrap(context: Context, language: String): ContextWrapper {
-            var context = context
-            val config = context.resources.configuration
+            var contextMain = context
+            val config = contextMain.resources.configuration
             var sysLocale: Locale? = null
             sysLocale = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
                 getSystemLocale(config)
@@ -34,14 +34,14 @@ class Language(base: Context?) : ContextWrapper(base) {
                 }
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                context = context.createConfigurationContext(config)
+                contextMain = contextMain.createConfigurationContext(config)
             } else {
-                context.resources.updateConfiguration(config, context.resources.displayMetrics)
+                contextMain.resources.updateConfiguration(config, contextMain.resources.displayMetrics)
             }
-            return Language(context)
+            return Language(contextMain)
         }
 
-        fun getSystemLocaleLegacy(config: Configuration): Locale {
+        private fun getSystemLocaleLegacy(config: Configuration): Locale {
             return config.locale
         }
 
@@ -50,7 +50,7 @@ class Language(base: Context?) : ContextWrapper(base) {
             return config.locales[0]
         }
 
-        fun setSystemLocaleLegacy(config: Configuration, locale: Locale?) {
+        private fun setSystemLocaleLegacy(config: Configuration, locale: Locale?) {
             config.locale = locale
         }
 

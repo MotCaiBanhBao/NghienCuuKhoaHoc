@@ -2,6 +2,7 @@ package k12tt.luongvany.presentation.binding.notification
 
 import k12tt.luongvany.domain.entities.Notification
 import k12tt.luongvany.domain.entities.NotificationType
+import java.time.format.DateTimeFormatter
 
 object NotificationConverter {
     fun fromData(notification: Notification): NotificationBinding {
@@ -24,7 +25,6 @@ object NotificationConverter {
             id = notification.id,
             content = notification.content,
             _url = notification.url,
-            _title = notification.title,
             image = notification.image,
             checked = notification.checked,
             publisher = notification.publisher,

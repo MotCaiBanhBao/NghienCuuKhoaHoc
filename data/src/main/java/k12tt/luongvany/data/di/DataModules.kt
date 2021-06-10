@@ -1,14 +1,18 @@
 package k12tt.luongvany.data.di
 
+import k12tt.luongvany.data.mapper.message.MessageDataMapper
+import k12tt.luongvany.data.mapper.message.MessageMapper
 import k12tt.luongvany.data.mapper.notification.NotificationMapper
 import k12tt.luongvany.data.mapper.notification.NotificationsDataMapper
 import k12tt.luongvany.data.mapper.topic.TopicDataMapper
 import k12tt.luongvany.data.mapper.topic.TopicMapper
 import k12tt.luongvany.data.mapper.user.UserDataMapper
 import k12tt.luongvany.data.mapper.user.UserMapper
+import k12tt.luongvany.data.repository.MessageRepositoryImpl
 import k12tt.luongvany.data.repository.NotificationsRepositoryImpl
 import k12tt.luongvany.data.repository.TopicRepositoryImpl
 import k12tt.luongvany.data.repository.UserRepositoryImpl
+import k12tt.luongvany.domain.repositories.MessageRepo
 import k12tt.luongvany.domain.repositories.NotificationRepo
 import k12tt.luongvany.domain.repositories.TopicRepo
 import k12tt.luongvany.domain.repositories.UserRepo
@@ -40,6 +44,9 @@ object DataModules {
                     entityMapper = TopicMapper(),
                     dataMapper = TopicDataMapper()
                 )
+            }
+            factory<MessageRepo>{
+                MessageRepositoryImpl(get(), MessageMapper(), MessageDataMapper())
             }
         }
         )

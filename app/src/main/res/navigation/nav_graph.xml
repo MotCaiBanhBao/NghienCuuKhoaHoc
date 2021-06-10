@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_listNotification_to_userDetailFragment"
             app:destination="@id/userDetailFragment" />
+        <action
+            android:id="@+id/to_main"
+            app:destination="@id/home_page" />
     </fragment>
 
 

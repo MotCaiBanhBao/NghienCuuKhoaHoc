@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="viewModel"
-            type="k12tt.luongvany.presentation.viewmodel.notification.NotificationListViewModel"/>
-
-        <variable
             name="notification"
             type="k12tt.luongvany.presentation.binding.notification.NotificationBinding"/>
     </data>
@@ -79,5 +75,9 @@
                 app:srcCompat="@drawable/ic_share_icon"
                 android:contentDescription="@string/button_share_decs" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/green_main" />
     </com.google.android.material.card.MaterialCardView>
 </layout>

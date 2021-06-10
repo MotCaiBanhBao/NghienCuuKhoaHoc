@@ -1,8 +1,10 @@
 package k12tt.luongvany.data.source
 
+import k12tt.luongvany.data.model.message.MessageData
 import k12tt.luongvany.data.model.notification.NotificationData
 import k12tt.luongvany.data.model.topic.TopicsData
 import k12tt.luongvany.data.model.user.UserData
+import k12tt.luongvany.domain.entities.Message
 import k12tt.luongvany.domain.entities.Topics
 import kotlinx.coroutines.flow.Flow
 
@@ -17,4 +19,6 @@ interface FBData {
     fun getUserNotification(): Flow<List<NotificationData>>
     suspend fun reSubcribe()
     suspend fun changeTopic(topics: List<TopicsData>, oldTopics: List<TopicsData>)
+    fun loadMessage(notificationId: String): Flow<List<MessageData>>
+    suspend fun pushMessage(message: MessageData, notificationId: String)
 }

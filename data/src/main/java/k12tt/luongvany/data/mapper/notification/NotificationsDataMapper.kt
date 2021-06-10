@@ -11,14 +11,15 @@ class NotificationsDataMapper : Mapper<Notification, NotificationData> {
         return NotificationData(
             id = source.id,
             content = source.content,
-            url = source.url,
+            _url = source._url,
             publisher = source.publisher,
-            _title = source.title,
             image = source.image,
             notificationType = mapNotificationType(source.notificationType),
             checked = source.checked,
             target = source.target
-        )
+        ).apply {
+            title = source.title
+        }
     }
 
     private fun mapNotificationType(notificationType: NotificationType): NotificationTypeData {

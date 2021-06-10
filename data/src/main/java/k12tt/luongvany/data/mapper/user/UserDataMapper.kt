@@ -13,7 +13,6 @@ class UserDataMapper: Mapper<User, UserData> {
             language = source.language,
             emailAdress = source.emailAdress,
             isAdmin = source.isAdmin,
-
         )
     }
 }

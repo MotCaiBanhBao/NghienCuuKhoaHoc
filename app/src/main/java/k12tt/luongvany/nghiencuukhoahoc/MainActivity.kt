@@ -28,6 +28,7 @@ import k12tt.luongvany.data.model.notification.NotificationData
 import k12tt.luongvany.domain.entities.Topics
 import k12tt.luongvany.nghiencuukhoahoc.databinding.ActivityMainBinding
 import k12tt.luongvany.nghiencuukhoahoc.notificationview.SlideBar
+import k12tt.luongvany.nghiencuukhoahoc.router.NotificationRouter.Companion.FROM_MAIN_PAGE
 import k12tt.luongvany.nghiencuukhoahoc.utils.AppPreference
 import k12tt.luongvany.presentation.Router
 import k12tt.luongvany.presentation.auth.Auth
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         object : AuthStateListener {
             override fun onAuthChanged(isLoggedIn: Boolean) {
                 if (!isLoggedIn) {
+                    Log.d("TEST4", "Co thay doi")
                     router.showLogin()
                 }
             }
@@ -89,7 +91,10 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         Log.d("TEST", "onStart")
         auth.addAuthChangeListener(authListener)
-
+        Picasso.get().load(UserSingleTon.getUserPhotoUrl()).fit().centerCrop().into(binding.userPictureProfile)
+        binding.userPictureProfile.setOnClickListener{
+           router.showUserDetail()
+        }
         setUpLanguageChoose()
         createToken()
     }
@@ -221,6 +226,7 @@ class MainActivity : AppCompatActivity() {
                 val token = task.result
                 MyFirebaseMessagingService.token = token
                 val msg = getString(R.string.msg_token_fms, token)
+                Log.d("TEST", msg)
                 Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
             })
 

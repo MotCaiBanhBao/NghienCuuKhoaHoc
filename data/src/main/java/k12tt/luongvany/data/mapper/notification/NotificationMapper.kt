@@ -11,8 +11,7 @@ class NotificationMapper: Mapper<NotificationData, Notification> {
         return Notification(
             id = source.id,
             content = source.content,
-            _url = source.url,
-            _title = source.title,
+            _url = source._url,
             publisher = source.publisher,
             image = source.image,
             notificationType = mapNotificationType(source.notificationType),

@@ -10,24 +10,21 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
+import k12tt.luongvany.data.model.message.MessageData
 import k12tt.luongvany.data.model.notification.NotificationData
 import k12tt.luongvany.data.model.topic.TopicsData
 import k12tt.luongvany.data.model.user.UserData
 import k12tt.luongvany.data.source.FBData
-import k12tt.luongvany.data_fb.api.NotificationAPI
 import k12tt.luongvany.data_fb.entities.PushNotification
 import k12tt.luongvany.data_fb.util.toPushNotification
-import k12tt.luongvany.domain.entities.Topics
 import k12tt.luongvany.domain.entities.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import java.lang.Exception
+import org.json.JSONObject
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -62,12 +59,50 @@ internal class FBDataImpl : FBData{
         }
     }
 
+    override fun loadMessage(notificationId: String): Flow<List<MessageData>> {
+        return callbackFlow {
+            val subscription = fireStore.collection("notifications").document(notificationId).collection("messages")
+                .orderBy("timestamp", Query.Direction.ASCENDING).addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    Timestamp(123L, 0)
+                    return@addSnapshotListener
+                }
+                if (snapshot != null && !snapshot.isEmpty) {
+                    val notifications = snapshot.map { document ->
+                        document.toObject(MessageData::class.java)
+                    }
+                    offer(notifications)
+                } else {
+                    offer(emptyList<MessageData>())
+                }
+            }
+            awaitClose {
+                subscription.remove()
+            }
+        }
+    }
+
+    override suspend fun pushMessage(message: MessageData, notificationId: String) {
+        return suspendCoroutine { continuation ->
+            val currentUser = fbAuth.currentUser
+            if (currentUser == null){
+                continuation.resumeWithException(RuntimeException("Unauthorized used."))
+            }else{
+                val db = fireStore
+                val collection = db.collection("notifications").document(notificationId).collection("messages")
+                    collection.add(message)
+                    .addOnSuccessListener { continuation.resume(Unit) }
+                    .addOnFailureListener { e -> continuation.resumeWithException(e) }
+            }
+        }
+    }
+
     override fun getUserNotification(): Flow<List<NotificationData>> {
         return callbackFlow {
 
             val currentUser = fbAuth.currentUser
             val subscription = fireStore.collection(NOTIFICATION_USER).document(currentUser.uid).collection("notifications")
-                .orderBy("timestamp").addSnapshotListener{ snapshot, e ->
+                .orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener{ snapshot, e ->
                     if(e != null){
                         Timestamp(123L, 0)
                         return@addSnapshotListener
@@ -131,6 +166,7 @@ internal class FBDataImpl : FBData{
             }
         }
     }
+
 
     private fun unSub(topics: List<TopicsData>) = CoroutineScope(Dispatchers.IO).launch{
         try {
@@ -206,9 +242,10 @@ internal class FBDataImpl : FBData{
         try {
             val response = RetrofitInstance.api.postNotification(notification)
             if (response.isSuccessful){
-                Log.d(TAG, "Response: ${response.raw()}")
+                val jObjError = JSONObject(response.body()!!.string())
+                Log.d(TAG, "Response: $jObjError")
             }else{
-                Log.e(TAG, "Lỗi" + response.errorBody().toString())
+                Log.e(TAG, "Lỗi ${response.errorBody()}")
             }
         }catch (e: Exception){
             Log.e(TAG, e.toString())

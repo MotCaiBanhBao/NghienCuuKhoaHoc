@@ -17,6 +17,7 @@ import k12tt.luongvany.nghiencuukhoahoc.notificationview.NotificationDetailsFrag
 import k12tt.luongvany.nghiencuukhoahoc.notificationview.SlideBar
 import k12tt.luongvany.presentation.Router
 import k12tt.luongvany.presentation.binding.notification.NotificationBinding
+import java.lang.Exception
 
 class NotificationRouter(val activity: FragmentActivity): Router {
     private val bottomNavigationView = activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
@@ -34,6 +35,12 @@ class NotificationRouter(val activity: FragmentActivity): Router {
             .setLaunchSingleTop(true)
             .setPopUpTo(R.id.signInFragment, false)
             .build()
+        try {
+            navController.navigate(R.id.to_main)
+        }catch (e: Exception){
+
+        }
+
         navController.navigate(R.id.signInFragment, null, options)
     }
 
@@ -154,6 +161,8 @@ class NotificationRouter(val activity: FragmentActivity): Router {
     }
 
    companion object{
+       const val FROM_MAIN_PAGE = 1
+       const val FROM_ANOTHER = 2
        const val HIDE_TOP = 1
        const val HIDE_BOT = 2
        const val HIDE_ALL = 3

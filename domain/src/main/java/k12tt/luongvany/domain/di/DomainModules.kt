@@ -1,5 +1,7 @@
 package k12tt.luongvany.domain.di
 
+import k12tt.luongvany.domain.usecases.message.GetListMessageUseCase
+import k12tt.luongvany.domain.usecases.message.PostMessageUseCase
 import k12tt.luongvany.domain.usecases.notification.ListNotificationsUseCase
 import k12tt.luongvany.domain.usecases.notification.PushNotificationUseCase
 import k12tt.luongvany.domain.usecases.notification.ViewNotificationDetailUseCase
@@ -26,6 +28,8 @@ object DomainModules {
 
             factory { ChangeTopicUseCase(repo = get()) }
             factory { GetTopicUseCase(repo = get()) }
+            factory { GetListMessageUseCase(repository = get()) }
+            factory { PostMessageUseCase(repository = get()) }
         })
     }
 }

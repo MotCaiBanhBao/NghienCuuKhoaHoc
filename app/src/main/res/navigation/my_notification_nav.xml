@@ -4,7 +4,6 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:id="@+id/notification_page"
     app:startDestination="@+id/mynotification_user">
-    <include app:graph="@navigation/nav_graph"/>
 
     <fragment
         android:id="@+id/mynotification_user"
@@ -12,18 +11,4 @@
         android:name="k12tt.luongvany.nghiencuukhoahoc.notificationview.UserNotificationListFragment"
         tool:layout="@layout/my_notification_layout">
     </fragment>
-
-    <fragment
-        android:id="@+id/signInFragment"
-        android:name="k12tt.luongvany.nghiencuukhoahoc.auth.SignInFragment"
-        android:label="@string/app_name"
-        tool:layout="@layout/main_login">
-        <action
-            android:id="@+id/action_signInFragment_to_listNotification"
-            app:destination="@id/listNotification" />
-        <action
-            android:id="@+id/action_mynotification_user_to_nav"
-            app:destination="@+id/home_page"/>
-    </fragment>
-
 </navigation>

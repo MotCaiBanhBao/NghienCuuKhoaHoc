@@ -42,7 +42,6 @@ class NotificationAdapter(private val onClick: (NotificationBinding) -> Unit, va
             notifications?.get(position)?.let { currentNotification ->
                 notification = currentNotification
                 executePendingBindings()
-                Log.d("TEST", "NOTICOTHAYDOI1")
                 R.color.main_background
                 root.setOnClickListener {
                     onClick(currentNotification)
