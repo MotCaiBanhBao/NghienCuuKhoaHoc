@@ -41,8 +41,6 @@ class TopicsViewModel(private val topicsViewModel: GetTopicUseCase,
         return false
     }
 
-
-
     fun changeTopic(topics: List<Topics>, oldTopic: List<TopicsBinding>?){
         changeTopicEvent.postValue(ViewState(ViewState.Status.LOADING))
         viewModelScope.launch {
@@ -61,9 +59,9 @@ class TopicsViewModel(private val topicsViewModel: GetTopicUseCase,
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun loadTopics() {
-        if (state.value == null) {
+            Log.d("TEST", "TopicsRunging")
             viewModelScope.launch {
                 state.postValue(TwoDataViewState(TwoDataViewState.Status.LOADING))
                 try {
@@ -86,6 +84,6 @@ class TopicsViewModel(private val topicsViewModel: GetTopicUseCase,
                     state.postValue(TwoDataViewState(TwoDataViewState.Status.ERROR, error = e))
                 }
             }
-        }
     }
+
 }

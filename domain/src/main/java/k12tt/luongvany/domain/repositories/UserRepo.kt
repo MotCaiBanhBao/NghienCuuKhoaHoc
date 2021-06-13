@@ -9,5 +9,6 @@ interface UserRepo {
     fun getUserTopics(): Flow<List<Topics>>
     fun loadNotifications(): Flow<List<Notification>>
     suspend fun reSubcribe()
+    suspend fun unSubcribe()
     fun getUser(userId: String): Flow<User?>
 }

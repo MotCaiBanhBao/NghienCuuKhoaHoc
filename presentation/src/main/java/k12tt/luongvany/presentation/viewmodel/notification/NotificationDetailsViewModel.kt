@@ -2,6 +2,7 @@ package k12tt.luongvany.presentation.viewmodel.notification
 
 import android.util.Log
 import androidx.lifecycle.*
+import k12tt.luongvany.domain.entities.User
 import k12tt.luongvany.domain.usecases.message.GetListMessageUseCase
 import k12tt.luongvany.domain.usecases.message.PostMessageUseCase
 import k12tt.luongvany.domain.usecases.notification.ViewNotificationDetailUseCase
@@ -34,13 +35,18 @@ class NotificationDetailsViewModel(private val notificationId: String,
     val notification = Transformations.map(state) { it.data }
 
     init {
+
         loadNotification()
     }
     fun getState(): LiveData<ViewState<NotificationBinding>> = state
 
-    fun pushMessage() {
+    fun pushMessage(user: User) {
         messageValue.value?.let {
+            it.userUidMessage = user.uid.toString()
+            it.userNameMessage = user.name.toString()
+            it.photoUrlMessage = user.avatarUri.toString()
             saveMessageEvent.postValue(ViewState(ViewState.Status.LOADING))
+            Log.d("TEST", it.photoUrlMessage)
             viewModelScope.launch {
                 try {
                     withContext(Dispatchers.IO) {
@@ -60,7 +66,6 @@ class NotificationDetailsViewModel(private val notificationId: String,
     }
 
     private fun loadMessage(id: String) {
-
         viewModelScope.launch {
             messageState.postValue(ViewState(ViewState.Status.LOADING))
             try {

@@ -17,6 +17,7 @@ import k12tt.luongvany.data.model.user.UserData
 import k12tt.luongvany.data.source.FBData
 import k12tt.luongvany.data_fb.entities.PushNotification
 import k12tt.luongvany.data_fb.util.toPushNotification
+import k12tt.luongvany.domain.entities.Topics
 import k12tt.luongvany.domain.entities.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +35,6 @@ import kotlin.coroutines.suspendCoroutine
 internal class FBDataImpl : FBData{
     private val fbAuth = FirebaseAuth.getInstance()
     private val fireStore = FirebaseFirestore.getInstance()
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun loadNotifications(): Flow<List<NotificationData>> {
         return callbackFlow {
@@ -62,7 +62,7 @@ internal class FBDataImpl : FBData{
     override fun loadMessage(notificationId: String): Flow<List<MessageData>> {
         return callbackFlow {
             val subscription = fireStore.collection("notifications").document(notificationId).collection("messages")
-                .orderBy("timestamp", Query.Direction.ASCENDING).addSnapshotListener { snapshot, e ->
+                .orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     Timestamp(123L, 0)
                     return@addSnapshotListener
@@ -89,6 +89,7 @@ internal class FBDataImpl : FBData{
                 continuation.resumeWithException(RuntimeException("Unauthorized used."))
             }else{
                 val db = fireStore
+                val firebaseMassaging = FirebaseMessaging.getInstance()
                 val collection = db.collection("notifications").document(notificationId).collection("messages")
                     collection.add(message)
                     .addOnSuccessListener { continuation.resume(Unit) }
@@ -171,6 +172,7 @@ internal class FBDataImpl : FBData{
     private fun unSub(topics: List<TopicsData>) = CoroutineScope(Dispatchers.IO).launch{
         try {
             val firebaseMassaging = FirebaseMessaging.getInstance()
+
             for (topic in topics){
                 for (item in topic.topics)
                     firebaseMassaging.unsubscribeFromTopic(item.values.toString().removePrefix("[").removeSuffix("]"))
@@ -233,7 +235,6 @@ internal class FBDataImpl : FBData{
                     .addOnSuccessListener { continuation.resume(Unit) }
                     .addOnFailureListener { e -> continuation.resumeWithException(e) }
 
-
                 }
             }
         }
@@ -259,13 +260,21 @@ internal class FBDataImpl : FBData{
             if(currentUser == null){
                 continuation.resumeWithException(RuntimeException("Đăng nhập lỗi"))
             }else{
-                val userData = User(currentUser.uid, currentUser.displayName, currentUser.email, fbAuth.languageCode, false)
-                db.collection(NOTIFICATION_USER).document(userData.uid).set(userData).addOnFailureListener{ e->
-                    continuation.resumeWithException(RuntimeException("Can create user", e))
-                }.addOnSuccessListener {
-                    val path = db.collection(NOTIFICATION_USER).document(userData.uid).collection(USER_TOPIC)
-                    for(topic in topics){
-                        path.document(topic.name).set(topic.topics)
+                val userData = User(uid = currentUser.uid,
+                    name = currentUser.displayName,
+                    emailAdress = currentUser.email,
+                    language = fbAuth.languageCode,
+                    avatarUri = (currentUser.photoUrl ?: "null").toString(),
+                    isAdmin =  false)
+
+                userData.uid?.let {
+                    db.collection(NOTIFICATION_USER).document(it).set(userData).addOnFailureListener{ e->
+                        continuation.resumeWithException(RuntimeException("Can create user", e))
+                    }.addOnSuccessListener {
+                        val path = db.collection(NOTIFICATION_USER).document(userData.uid!!).collection(USER_TOPIC)
+                        for(topic in topics){
+                            path.document(topic.name).set(topic.topics)
+                        }
                     }
                 }
             }
@@ -369,7 +378,26 @@ internal class FBDataImpl : FBData{
                 subcribeTopic(topics)
             }
         }
+    }
 
+    override suspend fun unSubcribeAll() {
+        val currentUser = fbAuth.currentUser
+        fireStore.collection(NOTIFICATION_USER).document(currentUser.uid).collection(USER_TOPIC).addSnapshotListener(){ snapshot, e ->
+            if(e != null){
+                Timestamp(123L, 0)
+                return@addSnapshotListener
+            }
+            if(snapshot != null && !snapshot.isEmpty){
+                val topics = snapshot.map { document ->
+                    TopicsData(document.id).apply {
+                        for (item in document.data){
+                            topics.add(mapOf(item.key to item.value as String))
+                        }
+                    }
+                }
+                unSub(topics)
+            }
+        }
     }
 
     companion object {

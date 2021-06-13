@@ -16,34 +16,25 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.Timestamp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.FirebaseMessagingService
 import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.squareup.picasso.Picasso
-import k12tt.luongvany.data.model.notification.NotificationData
-import k12tt.luongvany.domain.entities.Topics
 import k12tt.luongvany.nghiencuukhoahoc.databinding.ActivityMainBinding
 import k12tt.luongvany.nghiencuukhoahoc.notificationview.SlideBar
-import k12tt.luongvany.nghiencuukhoahoc.router.NotificationRouter.Companion.FROM_MAIN_PAGE
 import k12tt.luongvany.nghiencuukhoahoc.utils.AppPreference
 import k12tt.luongvany.presentation.Router
 import k12tt.luongvany.presentation.auth.Auth
 import k12tt.luongvany.presentation.auth.AuthStateListener
-import k12tt.luongvany.presentation.viewmodel.notification.NotificationListViewModel
 import k12tt.luongvany.presentation.viewmodel.user.MainActivityViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import kotlin.coroutines.resumeWithException
 
 
 class MainActivity : AppCompatActivity() {
     private var currentNavController: LiveData<NavController>? = null
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private val viewModel: MainActivityViewModel by viewModel()
 
     val auth: Auth<Int, Intent> by inject { parametersOf(this@MainActivity) }
@@ -68,7 +59,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         if (!auth.isLoggedIn()) {
             binding.root.visibility = View.GONE
@@ -92,9 +82,11 @@ class MainActivity : AppCompatActivity() {
         Log.d("TEST", "onStart")
         auth.addAuthChangeListener(authListener)
         Picasso.get().load(UserSingleTon.getUserPhotoUrl()).fit().centerCrop().into(binding.userPictureProfile)
+
         binding.userPictureProfile.setOnClickListener{
            router.showUserDetail()
         }
+
         setUpLanguageChoose()
         createToken()
     }
@@ -161,11 +153,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        
+
         if (requestCode == RC_GOOGLE_SIGN_IN) {
             try {
                 auth.handleSignInResult(data,
                     {
+                        Picasso.get().load(UserSingleTon.getUserPhotoUrl()).fit().centerCrop().into(binding.userPictureProfile)
                         router.showNotificationsList()
 
                     }, {

@@ -1,5 +1,31 @@
 <resources>
-    <string name="app_name">UDCK</string>
 
     <string name="home_page_label">ផ្ទះ</string>
+    <string name="login_with_email">បន្តតាមអ៊ីមែល</string>
+    <string name="text_notification_type_thoikhoabieu">ប្រតិទិនសិក្សា</string>
+    <string name="text_notification_type_thongbao">ការជូនដំណឹង</string>
+    <string name="string_error_signin">កំហុសក្នុងការចូល</string>
+    <string name="button_share_decs">ចែករំលែក</string>
+    <string name="send_float_button_desc">ផ្ញើការជូនដំណឹង</string>
+    <string name="send_notification_error">គណនីនេះមិនមានសិទ្ធិផ្ញើលិខិតជូនដំណឹងទេ</string>
+    <string name="send_notification_succes">ជោគជ័យ</string>
+    <string name="publisher_hint">តើ​អ្នក​ឈ្មោះ​អ្វី?</string>
+    <string name="target_hint">ថ្នាក់មួយណាដែលអ្នកចង់ផ្ញើ?</string>
+    <string name="content_hint">តើមាតិកាអ្វីដែលអ្នកចង់ប្រកាស?</string>
+    <string name="thoikhoabieu_radiobutton">ប្រតិទិនសិក្សា</string>
+    <string name="thong_bao_radiobutton">ការជូនដំណឹង</string>
+    <string name="detail_hint">អាសយដ្ឋានដើម្បីមើលព័ត៌មានលម្អិត</string>
+    <string name="push_button">ផ្ញើ</string>
+    <string name="choose_target_page_label">ជ្រើសរើស</string>
+    <string name="udck_detail_label">ពត៌មានលំអិត</string>
+    <string name="notification_page_label">ការជូនដំណឹង</string>
+    <string name="form_title">សំណុំបែបបទ</string>
+    <string name="detail_title">ពត៌មានលំអិត</string>
+    <string name="user_detail">អ្នក​ប្រើ</string>
+    <string name="logout_button">ចាកចេញ</string>
+    <string name="thoi_khoa_bieu_label">ប្រតិទិនសិក្សា</string>
+    <string name="thong_bao_label">ការជូនដំណឹង</string>
+    <string name="login">ចូល</string>
+    <string name="welcome">សូមស្វាគមន៍!</string>
+    <string name="save_button">រក្សាទុក</string>
 </resources>

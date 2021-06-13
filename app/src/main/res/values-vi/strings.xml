@@ -2,4 +2,30 @@
 <resources>
     <string name="home_page_label">Trang chủ</string>
     <string name="login_with_email">Tiếp tục với email</string>
+    <string name="text_notification_type_thoikhoabieu">Thời khoá biểu</string>
+    <string name="text_notification_type_thongbao">Thông báo</string>
+    <string name="string_error_signin">Lỗi đăng nhập</string>
+    <string name="button_share_decs">Chia sẻ</string>
+    <string name="send_float_button_desc">Gửi thông báo</string>
+    <string name="send_notification_error">Tài khoản không có quyền để gửi thông báo</string>
+    <string name="send_notification_succes">Thành công</string>
+    <string name="publisher_hint">Bạn là?</string>
+    <string name="target_hint">Bạn muốn gửi cho lớp nào?</string>
+    <string name="content_hint">Bạn muốn thông báo nội dung gì</string>
+    <string name="thoikhoabieu_radiobutton">Thời khoá biểu</string>
+    <string name="thong_bao_radiobutton">Thông báo</string>
+    <string name="detail_hint">Địa chỉ để xem chi tiết</string>
+    <string name="push_button">Gửi</string>
+    <string name="choose_target_page_label">Choose</string>
+    <string name="udck_detail_label">Chi tiết</string>
+    <string name="notification_page_label">Thông báo</string>
+    <string name="form_title">Mẫu</string>
+    <string name="detail_title">Chi tiết</string>
+    <string name="user_detail">Người dùng</string>
+    <string name="logout_button">Đăng xuất</string>
+    <string name="thoi_khoa_bieu_label">Thời khoá biểu</string>
+    <string name="thong_bao_label">Thông báo</string>
+    <string name="login">Đăng nhập</string>
+    <string name="welcome">Chào mừng!</string>
+    <string name="save_button">Lưu</string>
 </resources>

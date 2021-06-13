@@ -12,9 +12,15 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
+import com.squareup.picasso.Picasso
 import k12tt.luongvany.domain.entities.User
+import k12tt.luongvany.nghiencuukhoahoc.MainActivity
 import k12tt.luongvany.nghiencuukhoahoc.R
+import k12tt.luongvany.nghiencuukhoahoc.UserSingleTon
 import k12tt.luongvany.presentation.auth.Auth
+import javax.inject.Singleton
 
 class FirebaseSignIn(private val activity: FragmentActivity): Auth<Int, Intent>() {
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -54,6 +60,7 @@ class FirebaseSignIn(private val activity: FragmentActivity): Auth<Int, Intent>(
     }
 
     override fun signOut() {
+        FirebaseMessaging.getInstance().deleteToken()
         googleApiClient.signOut()
         firebaseAuth.signOut()
     }
@@ -71,15 +78,23 @@ class FirebaseSignIn(private val activity: FragmentActivity): Auth<Int, Intent>(
             .addOnCompleteListener(activity) { task ->
                 if (task.isSuccessful) {
                     if (task.result?.additionalUserInfo?.isNewUser == true){
-                        val fbAuth = FirebaseAuth.getInstance()
                         val fireStore = FirebaseFirestore.getInstance()
                         val db = fireStore
-                        val currentUser = fbAuth.currentUser
-                        val userData = User(currentUser.uid, currentUser.displayName, currentUser.email, "", false)
-                        db.collection("users").document(userData.uid).set(userData).addOnFailureListener{ e->
-                            googleApiClient.signOut()
-                            onError()
+
+                        UserSingleTon.getUserUid()?.let {
+                            val userData =  User(uid = UserSingleTon.getUserUid(),
+                                name = UserSingleTon.getUserName(),
+                                emailAdress = UserSingleTon.getEmail(),
+                                language = UserSingleTon.getLanguageNumber(),
+                                avatarUri = UserSingleTon.getUserPhotoUrl(),
+                                isAdmin =  false)
+
+                            db.collection("users").document(it).set(userData).addOnFailureListener{ e->
+                                googleApiClient.signOut()
+                                onError()
+                            }
                         }
+
                         onFirstLogin()
                     }
                     else{

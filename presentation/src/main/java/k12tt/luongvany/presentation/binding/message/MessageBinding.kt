@@ -44,6 +44,13 @@ class MessageBinding: BaseObservable(), Parcelable {
             field = value
             notifyPropertyChanged(BR.contextMessage)
         }
+    @Bindable
+    @IgnoredOnParcel
+    var hourOfMessage: String = ""
+        set(value){
+            field = value
+            notifyPropertyChanged(BR.hourOfMessage)
+        }
 
     @Bindable
     @IgnoredOnParcel
@@ -58,6 +65,7 @@ class MessageBinding: BaseObservable(), Parcelable {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
         other as MessageBinding
+        if (hourOfMessage != other.hourOfMessage) return false
         if (idMessage != other.idMessage) return false
         if (timestampMessage != other.timestampMessage) return false
         if (userNameMessage != other.userNameMessage) return false
@@ -69,6 +77,7 @@ class MessageBinding: BaseObservable(), Parcelable {
 
     override fun hashCode(): Int {
         var result = idMessage.hashCode()
+        result = 31 * result + hourOfMessage.hashCode()
         result = 31 * result + timestampMessage.hashCode()
         result = 31 * result + userNameMessage.hashCode()
         result = 31 * result + userUidMessage.hashCode()

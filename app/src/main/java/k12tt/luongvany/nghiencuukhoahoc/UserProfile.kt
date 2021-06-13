@@ -8,9 +8,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import k12tt.luongvany.nghiencuukhoahoc.common.BaseFragment
 import k12tt.luongvany.nghiencuukhoahoc.databinding.UserDetailBinding
+import k12tt.luongvany.presentation.viewmodel.user.MainActivityViewModel
+import k12tt.luongvany.presentation.viewmodel.user.UserDetailViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class UserProfile : BaseFragment(){
     private lateinit var binding: UserDetailBinding
+    private val viewModel: UserDetailViewModel by viewModel(){
+        parametersOf(FirebaseAuth.getInstance().currentUser.uid)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +39,7 @@ class UserProfile : BaseFragment(){
         binding.userClass.text = "null"
 
         binding.logout.setOnClickListener{
+            viewModel.unSubAll()
             auth.signOut()
         }
 

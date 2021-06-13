@@ -1,5 +1,31 @@
 <resources>
-    <string name="app_name">UDCK</string>
 
     <string name="home_page_label">ໝ້າ ຫລັກ</string>
+    <string name="login_with_email">ດຳເນີນຕໍ່ໃປດວ້ຍເມວ</string>
+    <string name="text_notification_type_thoikhoabieu">ການກຳນົດການ</string>
+    <string name="text_notification_type_thongbao">ແຈ້ງການ</string>
+    <string name="string_error_signin">ເຂົ້າສູ່ລະບົບຜິດພາດ</string>
+    <string name="button_share_decs">ແບ່ງປັນ</string>
+    <string name="send_float_button_desc">ສົ່ງການແຈ້ງເຕືອນ</string>
+    <string name="send_notification_error">ບັນຊິນີ້ບໍ່ໃດ້ຮັບອະນຸຍາດໃຫ້ສົ່ງຂໍ້ຄວາມການສັງເກດ</string>
+    <string name="send_notification_succes">ສຳເລັດ</string>
+    <string name="publisher_hint">ເຈົ້າແມ່ນ?</string>
+    <string name="target_hint">ເຈົ້າຕອ້ງການສົ່ງໃຫ້ຫອ້ງໃດ</string>
+    <string name="content_hint">ເຈົ້າຕອ້ງການປະກາດເນື້ອໃນຫຍັງ</string>
+    <string name="thoikhoabieu_radiobutton">ການກຳນົດການ</string>
+    <string name="thong_bao_radiobutton">ແຈ້ງການ</string>
+    <string name="detail_hint">ສະຖານທີ່ເພີ່ມເບີ່ງລາຍລະອງດ</string>
+    <string name="push_button">ສົ່ງ</string>
+    <string name="choose_target_page_label">ເລືອກ</string>
+    <string name="udck_detail_label">ລາຍລະອງດ</string>
+    <string name="detail_title">ລາຍລະອງດ</string>
+    <string name="form_title">ຮູບແບບ</string>
+    <string name="notification_page_label">ແຈ້ງການ</string>
+    <string name="user_detail">ຜູ້ໃຊ້</string>
+    <string name="logout_button">ອອກຈາກລະບົບ</string>
+    <string name="thoi_khoa_bieu_label">ການກຳນົດການ</string>
+    <string name="thong_bao_label">ແຈ້ງການ</string>
+    <string name="login">ເຂົ້າສູ່ລະບົບ</string>
+    <string name="save_button">ບັນທືກ</string>
+    <string name="welcome">Welcome!</string>
 </resources>

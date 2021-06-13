@@ -66,9 +66,9 @@
 
                             <com.google.android.material.chip.ChipGroup
                                 android:id="@+id/khoa_ky_thuat_chip_group"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/bottom_layout_rouded"></com.google.android.material.chip.ChipGroup>
+                                android:background="@drawable/bottom_layout_rouded" />
                         </HorizontalScrollView>
 
                         <View
@@ -95,10 +95,10 @@
 
                             <com.google.android.material.chip.ChipGroup
                                 android:id="@+id/khoa_kinhte_chip_group"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bottom_layout_rouded"
-                                app:singleLine="false"></com.google.android.material.chip.ChipGroup>
+                                app:singleLine="false" />
                         </HorizontalScrollView>
 
                         <View
@@ -125,10 +125,10 @@
 
                             <com.google.android.material.chip.ChipGroup
                                 android:id="@+id/khoa_supham_chip_group"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bottom_layout_rouded"
-                                app:singleLine="false"></com.google.android.material.chip.ChipGroup>
+                                app:singleLine="false" />
                         </HorizontalScrollView>
 
                         <View

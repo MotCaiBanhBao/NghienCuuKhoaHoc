@@ -31,6 +31,10 @@ internal class UserRepositoryImpl (private val fbData: FBData,
         fbData.reSubcribe()
     }
 
+    override suspend fun unSubcribe() {
+        fbData.unSubcribeAll()
+    }
+
 
     override fun getUser(userId: String): Flow<User?> {
         return fbData.getUser(userId).map { it?.let(entityMapper::map)}

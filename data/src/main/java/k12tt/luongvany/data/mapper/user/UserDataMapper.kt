@@ -10,6 +10,7 @@ class UserDataMapper: Mapper<User, UserData> {
         return UserData(
             uid = source.uid,
             name =  source.name,
+            avatarUri = source.avatarUri,
             language = source.language,
             emailAdress = source.emailAdress,
             isAdmin = source.isAdmin,

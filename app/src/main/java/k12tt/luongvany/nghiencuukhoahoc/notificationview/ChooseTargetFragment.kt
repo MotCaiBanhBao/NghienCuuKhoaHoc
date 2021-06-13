@@ -20,6 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 import k12tt.luongvany.domain.entities.Topics
 import k12tt.luongvany.nghiencuukhoahoc.MainActivity
 import k12tt.luongvany.nghiencuukhoahoc.R
+import k12tt.luongvany.nghiencuukhoahoc.common.BaseFragment
 import k12tt.luongvany.nghiencuukhoahoc.databinding.SelectTargetLayoutBinding
 import k12tt.luongvany.nghiencuukhoahoc.router.NotificationRouter.Companion.HIDE_BOT
 import k12tt.luongvany.nghiencuukhoahoc.router.NotificationRouter.Companion.HIDE_TOP
@@ -33,17 +34,16 @@ import kotlinx.coroutines.internal.artificialFrame
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class ChooseTargetFragment: DialogFragment() {
+class ChooseTargetFragment: BaseFragment() {
     private lateinit var dataBinding: SelectTargetLayoutBinding
     private val viewModel: TopicsViewModel by viewModel()
-    val router: Router
-        get() = (activity as MainActivity).router
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dataBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.select_target_layout,
             container, false) as SelectTargetLayoutBinding
+        Log.d("TEST", "ChooseTarget onCreateView")
         dataBinding.kythuatSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             dataBinding.khoaKyThuatChipGroup.visibility = if (isChecked) View.VISIBLE else View.GONE
         }
@@ -58,11 +58,33 @@ class ChooseTargetFragment: DialogFragment() {
         return dataBinding.run {
             lifecycleOwner = this@ChooseTargetFragment
             viewModel = this@ChooseTargetFragment.viewModel
-            init()
             root
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        init()
+        dataBinding.toolbar.title = "Choose your channel"
+        dataBinding.toolbar.inflateMenu(R.menu.choose_target_menu)
+        dataBinding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.action_save_choose -> {
+                    viewModel.changeTopic(convertToData(), viewModel.state().value?.userData)
+                    true
+                }
+                else -> {
+                    true
+                }
+            }
+        }
+        Log.d("TEST", "ChooseTarget onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("TEST", "ChooseTarget onResume")
+    }
     private fun showMessageSuccess() {
         AlertDialog.Builder(requireContext())
             .setTitle("Thành công")
@@ -98,6 +120,7 @@ class ChooseTargetFragment: DialogFragment() {
 
                         }
                         TwoDataViewState.Status.SUCCESS -> {
+
                             initSwitch()
                         }
                         TwoDataViewState.Status.ERROR -> {
@@ -120,8 +143,8 @@ class ChooseTargetFragment: DialogFragment() {
         super.onCreate(savedInstanceState)
         Log.d("TEST", "cREATE")
         retainInstance = true
-        setStyle(STYLE_NORMAL, R.style.AppTheme_FullScreenDialog)
     }
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -130,31 +153,7 @@ class ChooseTargetFragment: DialogFragment() {
         init()
         router.hideAppBarAndBottom(HIDE_TOP)
 
-//        dataBinding.scroll.viewTreeObserver.addOnScrollChangedListener(object : OnScrollChangedListener {
-//            var y = 0f
-//            override fun onScrollChanged() {
-//                if (dataBinding.scroll.scrollY > y) {
-//                    router.hideAppBarAndBottom(HIDE_BOT)
-//                } else {
-//                    router.showAppBarAndBottom(SHOW_BOT)
-//                }
-//                y = dataBinding.scroll.scrollY.toFloat()
-//            }
-//        })
-        dataBinding.toolbar.setNavigationOnClickListener { v -> dismiss() }
-        dataBinding.toolbar.title = "Choose your channel"
-        dataBinding.toolbar.inflateMenu(R.menu.choose_target_menu)
-        dataBinding.toolbar.setOnMenuItemClickListener {
-            when(it.itemId){
-                R.id.action_save_choose -> {
-                    viewModel.changeTopic(convertToData(), viewModel.state().value?.userData)
-                    true
-                }
-                else -> {
-                    true
-                }
-            }
-        }
+//        dataBinding.toolbar.setNavigationOnClickListener { v -> dismiss() }
     }
 
     @OptIn(ExperimentalStdlibApi::class)
@@ -208,6 +207,7 @@ class ChooseTargetFragment: DialogFragment() {
 
 
     private fun initSwitch(){
+
         dataBinding.kythuatSwitch.isChecked = viewModel.isCheck(1)
         dataBinding.kinhteSwitch.isChecked = viewModel.isCheck(2)
         dataBinding.suphamSwitch.isChecked = viewModel.isCheck(3)

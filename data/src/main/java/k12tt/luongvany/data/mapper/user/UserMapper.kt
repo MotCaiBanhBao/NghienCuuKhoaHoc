@@ -11,6 +11,7 @@ class UserMapper: Mapper<UserData, User> {
             uid = source.uid,
             name =  source.name,
             language = source.language,
+            avatarUri = source.avatarUri,
             emailAdress = source.emailAdress,
             isAdmin = source.isAdmin,
         )

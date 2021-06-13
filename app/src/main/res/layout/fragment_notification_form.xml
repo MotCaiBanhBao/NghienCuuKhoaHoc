@@ -5,7 +5,6 @@
     <data>
         <import type="k12tt.luongvany.presentation.ViewState" />
         <import type="k12tt.luongvany.presentation.binding.notification.NotificationTypeBinding" />
-
         <variable
             name="viewModel"
             type="k12tt.luongvany.presentation.viewmodel.notification.NotificationFormViewModel" />
@@ -22,7 +21,7 @@
         android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -45,11 +44,12 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/content_edit"
+                android:maxLines="5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/content_hint"
                 android:imeOptions="actionNext"
-                android:inputType="textCapWords"
+                android:inputType="textMultiLine"
                 android:text="@={viewModel.notification().content}" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <com.google.android.material.chip.ChipGroup
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/khoa_ky_thuat_chip_group"
                             android:background="@drawable/bottom_layout_rouded">
@@ -123,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <com.google.android.material.chip.ChipGroup
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/khoa_kinhte_chip_group"
                             app:singleLine="false"
@@ -151,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <com.google.android.material.chip.ChipGroup
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/khoa_supham_chip_group"
                             app:singleLine="false"

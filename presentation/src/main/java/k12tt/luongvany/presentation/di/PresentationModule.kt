@@ -32,8 +32,9 @@ object PresentationModule {
             viewModel {
                 MainActivityViewModel(get())
             }
+
             viewModel {
-                    (userId: String) -> UserDetailViewModel(userId, get())
+                    (userId: String) -> UserDetailViewModel(userId, get(), get())
             }
             viewModel {
                 UserNotificationViewModel(get())

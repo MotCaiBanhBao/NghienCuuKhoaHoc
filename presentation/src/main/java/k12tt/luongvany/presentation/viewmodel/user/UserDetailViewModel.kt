@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import k12tt.luongvany.domain.usecases.notification.PushNotificationUseCase
 import k12tt.luongvany.domain.usecases.notification.ViewNotificationDetailUseCase
 import k12tt.luongvany.domain.usecases.user.GetUserUseCase
+import k12tt.luongvany.domain.usecases.user.UnsubcribeUseCase
 import k12tt.luongvany.presentation.ViewState
 import k12tt.luongvany.presentation.binding.notification.NotificationBinding
 import k12tt.luongvany.presentation.binding.notification.NotificationConverter
@@ -18,16 +19,28 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class UserDetailViewModel (private val userId: String,
-                           private val viewNotificationDetailsUseCase: GetUserUseCase
+                           private val viewNotificationDetailsUseCase: GetUserUseCase,
+                           private val unsubcribeUseCase: UnsubcribeUseCase
 ): ViewModel() {
 
     private val state: MutableLiveData<ViewState<UserBinding>> = MutableLiveData()
     val notification = Transformations.map(state) { it.data }
 
-    init {
-        loadUser()
-    }
+//    init {
+//        loadUser()
+//    }
     fun getState(): LiveData<ViewState<UserBinding>> = state
+
+    fun unSubAll() {
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    unsubcribeUseCase.execute()
+                }
+            } catch (e: Exception) {
+            }
+        }
+    }
 
     fun loadUser() {
         viewModelScope.launch {

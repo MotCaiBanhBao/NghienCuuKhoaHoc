@@ -5,11 +5,11 @@ import k12tt.luongvany.domain.entities.User
 object UserConverter {
     fun fromData(user: User): UserBinding {
         return UserBinding().apply {
-            nameUser = user.name
-            uid = user.uid
-            emailAdress = user.emailAdress
-            language = user.language
-            isAdmin = user.isAdmin
+            nameUser = user.name.toString()
+            uid = user.uid.toString()
+            emailAdress = user.emailAdress.toString()
+            language = user.language.toString()
+            isAdmin = user.isAdmin == true
         }
     }
 

@@ -46,6 +46,7 @@ class NotificationRouter(val activity: FragmentActivity): Router {
 
     override fun showNotificationsList() {
         showAppBarAndBottom(SHOW_ALL)
+
         navController.navigate(R.id.listNotification)
     }
 
@@ -71,6 +72,7 @@ class NotificationRouter(val activity: FragmentActivity): Router {
         val args = Bundle().apply {
             putParcelable("notification", notificationBinding)
         }
+
         NotificationDetailsFragment().apply {
             arguments = args
         }.show(activity.supportFragmentManager, NotificationDetailsFragment.TAG)

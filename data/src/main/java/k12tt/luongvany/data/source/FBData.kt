@@ -18,6 +18,7 @@ interface FBData {
     fun getUserTopics():Flow<List<TopicsData>>
     fun getUserNotification(): Flow<List<NotificationData>>
     suspend fun reSubcribe()
+    suspend fun unSubcribeAll()
     suspend fun changeTopic(topics: List<TopicsData>, oldTopics: List<TopicsData>)
     fun loadMessage(notificationId: String): Flow<List<MessageData>>
     suspend fun pushMessage(message: MessageData, notificationId: String)
