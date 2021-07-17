@@ -347,8 +347,7 @@ thống như sử dụng mô hình trang web đang dần lộ ra 1 số hạn ch
 như Flash, hiển thị tập file pdf... Chính điều này khiến cho việc đồng
 bộ giữa các nền tảng cũng như bảo trì trở nên khó khăn hơn.
 
-![](media/image1.png){width="6.263888888888889in"
-height="2.852777777777778in"}
+![](media/image1.png)
 
 []{#_Toc73084869 .anchor}Hình : Hạn chế trong việc sử dụng một số công
 nghệ
