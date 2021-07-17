@@ -184,142 +184,6 @@
 **\
 **
 
-DANH MỤC HÌNH
-
-[Hình 1: Hạn chế trong việc sử dụng một số công nghệ 1](#_Toc73084869)
-
-[Hình 2: Lập trình MIDLet 4](#_Toc73084870)
-
-[Hình 3: Android OS 5](#_Toc73084871)
-
-[Hình 4: Hệ sinh thái Android được vẽ vào năm 2018 6](#_Toc73084872)
-
-[Hình 5: Một số công cụ trong SDK hỗ trợ việc lập trình
-7](#_Toc73084873)
-
-[Hình 6: Kiến trúc hệ điều hành Android 8](#_Toc73084874)
-
-[Hình 7: Mô tả ứng dụng Android khi chạy 11](#_Toc73084875)
-
-[Hình 8: Tệp AndroidManifest.xml ứng dụng 13](#_Toc73084876)
-
-[Hình 9: Ví dụ về AndroidManifest.xml 14](#_Toc73084877)
-
-[Hình 10: Lập trình đa mô hình với Kotlin 15](#_Toc73084878)
-
-[Hình 11: Ngôn ngữ lập trình Kotlin 16](#_Toc73084879)
-
-[Hình 12: Kiểu số nguyên trong Kotlin 22](#_Toc73084880)
-
-[Hình 13: Kiểu số thực trong Kotlin 22](#_Toc73084881)
-
-[Hình 14: Kotlin visible modifier 23](#_Toc73084882)
-
-[Hình 15: Kiến trúc clean 24](#_Toc73084883)
-
-[Hình 16: Công cụ Gradle 26](#_Toc73084884)
-
-[Hình 17: Hai ví dụ về đồ thị nhiệm vụ Gradle 27](#_Toc73084885)
-
-[Hình 18: Sự khác biệt giữa các phát triển truyền thống và sử dụng
-Firebase 29](#_Toc73084886)
-
-[Hình 19: Một số dịch vụ mà Firebase cung cấp 29](#_Toc73084887)
-
-[Hình 20: Firebase Auth đăng nhập bằng các dịch vụ nổi tiếng
-30](#_Toc73084888)
-
-[Hình 21: Quy tắc bảo mật được áp dụng trong Firebase 31](#_Toc73084889)
-
-[Hình 22: Realtime database 32](#_Toc73084890)
-
-[Hình 23: Bảng điều khiển realtime database 32](#_Toc73084891)
-
-[Hình 24: Cloud Firestore 33](#_Toc73084892)
-
-[Hình 25: Ví dụ về Firestore 34](#_Toc73084893)
-
-[Hình 26: So sánh giữa Realtime và Firestore database 35](#_Toc73084894)
-
-[Hình 27: Storage tại bẳng điều kiển của Firebase 36](#_Toc73084895)
-
-[Hình 28: Google cloud Functions 36](#_Toc73084896)
-
-[Hình 29: Kiến trúc của Cloud Messaging 37](#_Toc73084897)
-
-[Hình 30: Firebase Console 38](#_Toc73084898)
-
-[Hình 31: Một số thư viện được sử dụng trong ứng dụng 41](#_Toc73084899)
-
-[Hình 32: Các module của hệ thống 41](#_Toc73084900)
-
-[Hình 33: Domain Module 42](#_Toc73084901)
-
-[Hình 34: Module data 43](#_Toc73084902)
-
-[Hình 35: Module data firebase 43](#_Toc73084903)
-
-[Hình 36: Module presentation 44](#_Toc73084904)
-
-[Hình 37: Module app 45](#_Toc73084905)
-
-[Hình 38: Luồng của cấu trúc 45](#_Toc73084906)
-
-[Hình 39: Sơ đồ luồng dữ liệu mức ngữ cảnh 46](#_Toc73084907)
-
-[Hình 40: Sơ đồ luồng dữ liệu mức đỉnh 47](#_Toc73084908)
-
-[Hình 41: Sơ đồ Use-case 48](#_Toc73084909)
-
-[Hình 42: Sơ đồ sequence cho login 49](#_Toc73084910)
-
-[Hình 43: Sơ đồ sequence cho chức năng xem thông báo 50](#_Toc73084911)
-
-[Hình 44: Sơ dồ sequence cho chức năng share 51](#_Toc73084912)
-
-[Hình 45: Sơ đồ sequence cho chức năng gửi thông báo 51](#_Toc73084913)
-
-[Hình 46: Sơ đồ cơ sở dữ liệu 52](#_Toc73084914)
-
-[Hình 47: Công cụ Android studio 53](#_Toc73084915)
-
-[Hình 48: Công cụ Firebase 53](#_Toc73084916)
-
-[Hình 49: Công cụ máy ảo 54](#_Toc73084917)
-
-[Hình 50: Icon ứng dụng 55](#_Toc73084918)
-
-[Hình 51: Màn hình login chính 56](#_Toc73084919)
-
-[Hình 52: Màn hình cho chào mừng 56](#_Toc73084920)
-
-[Hình 53: Màn hình chính, cho phép xem thông báo 57](#_Toc73084921)
-
-[Hình 54: Màn hình gửi thông báo 58](#_Toc73084922)
-
-[Hình 55: Giao diện lỗi khi tài khoản không có đủ quyền trong hệ thống
-59](#_Toc73084923)
-
-[Hình 56: Màn hình lựa chọn đối tượng 60](#_Toc73084924)
-
-[Hình 57: Dữ liệu sau khi được đẩy lên Firebase 61](#_Toc73084925)
-
-[Hình 58: Màn hình thông báo 61](#_Toc73084926)
-
-[Hình 59: Màn hình User 62](#_Toc73084927)
-
-[Hình 60: Giao diện truy cập trang web UDCK 63](#_Toc73084928)
-
-[Hình 61: Giao diện chọn đăng kí đối tượng để nhận thông tin
-64](#_Toc73084929)
-
-[Hình 62: Giao diện thông báo cá nhân 65](#_Toc73084930)
-
-[Hình 63: Giao diện chức năng đổi ngôn ngữ 66](#_Toc73084931)
-
-[Hình 64: Màn hình tính năng chia sẻ 67](#_Toc73084932)
-
-[Hình 65: Màn hình xem chi tiết thông báo 68](#_Toc73084933)
 
 **DANH SÁCH VIẾT TẮT**
 
@@ -473,8 +337,7 @@ và không tận dụng được lợi thế vốn có là tính di động củ
 mobile.
 
 ![Bangla Tutorial - J2ME : Creating Hello MIDlet using Netbeans -
-YouTube](media/image2.jpeg){width="6.295138888888889in"
-height="3.540277777777778in"}
+YouTube](media/image2.jpeg)
 
 []{#_Toc73084870 .anchor}Hình : Lập trình MIDLet
 
@@ -499,8 +362,7 @@ các ứng dụng của bên thứ ba, ngay cả các ứng dụng HomeScreen ha
 dụng gọi điện đều có thể thay thế được.
 
 ![Android sẽ yêu cầu ứng dụng cấp quyền như iOS 14 - VnExpress Số
-hóa](media/image3.jpeg){width="3.064000437445319in"
-height="2.0412029746281717in"}
+hóa](media/image3.jpeg)
 
 []{#_Toc73084871 .anchor}Hình : Android OS
 
@@ -548,8 +410,7 @@ Android được tạo thành bởi các phần chính:
 -   A software development kit (SDK) được sử dụng để tạo các ứng dụng
     bao gồm các công cụ liên quan, IDE, các tài liệu...
 
-![](media/image4.jpeg){width="5.382113954505686in"
-height="4.753359580052494in"}
+![](media/image4.jpeg)
 
 []{#_Toc73084872 .anchor}Hình : Hệ sinh thái Android được vẽ vào năm
 2018
@@ -573,8 +434,7 @@ cấp tất cả mọi thứ cần thiết cho một lập trình viên Android:
 -   Các tài liệu chi tiết và các ví dụ
 
 ![Android 2018: create Android Virtual Device (AVD) Emulator for Android
-Studio 3.0.1 - YouTube](media/image5.jpeg){width="5.63080271216098in"
-height="3.1666666666666665in"}
+Studio 3.0.1 - YouTube](media/image5.jpeg)
 
 []{#_Toc73084873 .anchor}Hình : Một số công cụ trong SDK hỗ trợ việc lập
 trình
@@ -587,8 +447,7 @@ trên xuống dưới, được chia thành các phần sau:
 ![Android Software Stack illustrating Application Layer,
 Support/Compatibility/Proprietary Libraries, Application Framework,
 Native (C/C++) Libraries, Hardware Abstraction Layer (HAL), and Linux
-Kernel.](media/image6.jpeg){width="6.201754155730534in"
-height="8.994424759405074in"}
+Kernel.](media/image6.jpeg)
 
 []{#_Toc73084874 .anchor}Hình : Kiến trúc hệ điều hành Android
 
@@ -674,8 +533,7 @@ bảo mật được cung cấp bởi Android:
     thiết nữa hay khi hệ thống cần phải lấy lại bộ nhớ để sử dụng các
     ứng dụng khác
 
-![Photo](media/image7.png){width="6.295138888888889in"
-height="4.805555555555555in"}
+![Photo](media/image7.png)
 
 []{#_Toc73084875 .anchor}Hình : Mô tả ứng dụng Android khi chạy
 
@@ -753,8 +611,7 @@ biết đến các thành phần xuất hiện trong ứng dụng bằng cách �
 file, AndroidManifest.xml. Ứng dụng cần phải khau báo tất cả các thành
 phần của ứng dụng trong tệp này và tệp này nằm ở thư mục gốc của dự án.
 
-![](media/image8.png){width="4.097222222222222in"
-height="2.9444444444444446in"}
+![](media/image8.png)
 
 []{#_Toc73084876 .anchor}Hình : Tệp AndroidManifest.xml ứng dụng
 
@@ -777,8 +634,7 @@ hiện một số việc sau:
     nhiệm vụ chính của tệp manifest là khai báo cho hệ thống biết các
     thông tin về các thành phần của ứng dụng
 
-![](media/image9.png){width="6.295138888888889in"
-height="5.196527777777778in"}
+![](media/image9.png)
 
 []{#_Toc73084877 .anchor}Hình : Ví dụ về AndroidManifest.xml
 
@@ -823,7 +679,7 @@ cũng có thể biên dịch sang JavaScript
     Programming), lập trình bất đồng bộ (Asynchronous), lập trình kịch
     bản (Scripting)
 
-![](media/image10.png){width="6.081727909011374in" height="2.64in"}
+![](media/image10.png)
 
 []{#_Toc73084878 .anchor}Hình : Lập trình đa mô hình với Kotlin
 
@@ -844,8 +700,7 @@ cũng có thể biên dịch sang JavaScript
     \@Nullabel và \@NonNull, Kotlin sẽ tránh khỏi các ngoại lệ về Null
 
 ![Kotlin Programming
-Language](media/image11.png){width="6.295138888888889in"
-height="2.51875in"}
+Language](media/image11.png)
 
 []{#_Toc73084879 .anchor}Hình : Ngôn ngữ lập trình Kotlin
 
@@ -855,39 +710,33 @@ height="2.51875in"}
 
 -   Dùng **var** keyword để khai báo biến
 
-![](media/image12.png){width="6.295138888888889in" height="0.7375in"}
+![](media/image12.png)
 
 -   Để khai báo một hằng, trong Kotlin sử dụng val keyword. val trong
     Kotlin tương tự **fina**l trong Java
 
-![](media/image13.png){width="6.295138888888889in"
-height="1.2138888888888888in"}
+![](media/image13.png)
 
 -   Để khai báo một biến có thể null, Kotlin sử dụng toàn tử "?". Nếu
     một biến mà không có toán tử "?" thì nó không cho phép gán null làm
     giá trị, nếu cố gán sẽ gây ra lỗi.
 
-![](media/image14.png){width="6.295138888888889in"
-height="0.5347222222222222in"}
+![](media/image14.png)
 
 -   Để định nghĩa một biến static trong một lớp, Kotlin sử dụng
     companion object trong một class
 
-![](media/image15.png){width="6.295138888888889in"
-height="1.6868055555555554in"}
-
+![](media/image15.png)
 -   Để định nghĩa một biến mà biến đó sẽ được khởi tạo sau, Kotlin dùng
     lateinit
 
-![](media/image16.png){width="6.295138888888889in"
-height="0.6729166666666667in"}
+![](media/image16.png)
 
 #### Hàm
 
 Một hàm trong Kotlin sẽ có cấu trúc như sau
 
-![](media/image17.png){width="6.295138888888889in"
-height="0.8666666666666667in"}
+![](media/image17.png)
 
 Trong đó, getNumber() là một hàm có visible modifier là public, không có
 tham số và trả về một giá trị có kiểu Int.
@@ -895,53 +744,45 @@ tham số và trả về một giá trị có kiểu Int.
 Dưới đây là một hàm có visible modifier là private, có 2 tham số và trả
 về 1 giá trị kiểu Int
 
-![](media/image18.png){width="6.295138888888889in"
-height="0.8388888888888889in"}
-
+![](media/image18.png)
 Còn đây là một static function, trong đó có 1 đối số kiểu string, và hàm
 này có thể trả về giá trị null
 
-![](media/image19.png){width="6.295138888888889in"
-height="2.4444444444444446in"}
+![](media/image19.png)
 
 Trong khi đó, đây là một hàm không trả về một giá trị gì cả
 
-![](media/image20.png){width="6.295138888888889in"
-height="0.9902777777777778in"}
+![](media/image20.png)
 
 Ngoài ra, hàm trong Kotlin có thể viết dưới dạng biểu thức như sau, tuy
 nhiên cách viết này chỉ được sử dụng khi hàm chỉ trả về một giá vị và
 giá trị đó được tính trong một biểu thức
 
-![](media/image21.png){width="6.295138888888889in"
-height="0.5326388888888889in"}
+![](media/image21.png)
 
 #### Vòng lặp
 
 Khác với Java vòng lặp for trong Kotlin sử dụng "in" keyword để truy cập
 và duyệt các phần tử trong một collection
 
-![](media/image22.png){width="6.295138888888889in" height="1.1875in"}
+![](media/image22.png)
 
 Ngoài ra, cũng có thể sử dụng index để duyệt một collection
 
-![](media/image23.png){width="6.295138888888889in" height="0.99375in"}
-
+![](media/image23.png)
 Vòng lặp while trong Kotlin tương tự như trong Java
 
-![](media/image24.png){width="6.295138888888889in"
-height="2.7284722222222224in"}
+![](media/image24.png)
 
 Tuy nhiên đối với switch thì Kotlin sử dụng "when" key word để thay thế
 
-![](media/image25.png){width="6.295138888888889in" height="3.0in"}
+![](media/image25.png)
 
 #### Comments
 
 Để comments trong Kotlin, sử dụng:
 
-![](media/image26.png){width="6.295138888888889in"
-height="1.1055555555555556in"}
+![](media/image26.png)
 
 #### Null safety
 
@@ -950,19 +791,18 @@ dụng toán tử "?" để kiểm tra null
 
 Dưới đây là một đoạn code kiểm tra null trong Java:
 
-![](media/image27.png){width="6.295138888888889in"
-height="0.8548611111111111in"}
+![](media/image27.png)
 
 Còn đây là đoạn code được viết lại bằng Kotlin
 
-![](media/image28.png){width="6.295138888888889in" height="0.8375in"}
+![](media/image28.png)
 
 Trong Kotlin, toán tử "?" được gọi là "safe call operator"
 
 Trong trường hợp muốn check null và trả về một giá trị nào đó thì có thể
 sử dụng "Elvis operator"
 
-![](media/image29.png){width="6.295138888888889in" height="0.71875in"}
+![](media/image29.png)
 
 Đoạn code trên có thể mô tả như sau: định nghĩa biến name, name có giá
 trị là tên của person nếu person không null, nếu person null, sẽ lấy giá
@@ -972,14 +812,12 @@ trị đằng sau toán tử Elvis.
 
 Một lớp trong Kotlin sẽ có cấu trúc như sau:
 
-![](media/image30.png){width="6.295138888888889in"
-height="2.8243055555555556in"}
+![](media/image30.png)
 
 Để kế thừa các lớp, các giao diện, trong Koltin, được định nghĩa bằng
 ":". Constructor của một class có thể được viết đặc biệt như sau
 
-![](media/image31.png){width="6.295138888888889in"
-height="1.3090277777777777in"}
+![](media/image31.png)
 
 Như trong hình constructor sẽ được viết trực tiếp đằng sau tên của class
 
@@ -988,15 +826,13 @@ Như trong hình constructor sẽ được viết trực tiếp đằng sau tên
 Để sử dụng Singleton pattern, chỉ cần thay thế class thành object, rất
 dễ dàng. Nó giúp tránh được rất nhiều đoạn code dư thừa.
 
-![](media/image32.png){width="6.295138888888889in"
-height="2.263888888888889in"}
+![](media/image32.png)
 
 #### Interface
 
 Một interface trong Kotlin sẽ trông như thế này:
 
-![](media/image33.png){width="6.295138888888889in"
-height="3.198611111111111in"}
+![](media/image33.png)
 
 Interface trong Kotlin sẽ được bắt đầu bằng keyword "interface". Và nó
 có tất cả các đặc điểm của một interface trong lập trình hướng đối
@@ -1004,22 +840,20 @@ tượng, như có thể kế thừa nó ở lớp khác...
 
 Còn dưới đây là triển khai một interface trong một function
 
-![](media/image34.png){width="6.295138888888889in"
-height="2.286111111111111in"}
+![](media/image34.png)
 
 #### Type Casts
 
 Sử dụng toán tử "is" và "!is" để kiểm tra một đối tượng có là thực thế
 của một class hay không
 
-![](media/image35.png){width="6.295138888888889in"
-height="1.5208333333333333in"}
+![](media/image35.png)
 
 #### Xử lý ngoại lệ (Exception Handle)
 
 Sử lý ngoại lệ khá giống với Java, Kotlin sử dụng try catch, finally
 
-![](media/image36.png){width="6.295138888888889in" height="2.24375in"}
+![](media/image36.png)
 
 #### Type
 
@@ -1030,15 +864,12 @@ gọi các function của nó. Trong Kotlin, có các kiểu cơ bản sau đây
 
     -   Kiểu số nguyên
 
-![](media/image37.png){width="6.295138888888889in"
-height="1.8854166666666667in"}
-
+![](media/image37.png)
 []{#_Toc73084880 .anchor}Hình : Kiểu số nguyên trong Kotlin
 
 -   Kiểu số thực
 
-![](media/image38.png){width="6.295138888888889in"
-height="1.1569444444444446in"}
+![](media/image38.png)
 
 []{#_Toc73084881 .anchor}Hình : Kiểu số thực trong Kotlin
 
@@ -1054,8 +885,7 @@ Data class là một điều khác Java của Kotlin. Data class được sử d
 tạo một class chỉ dùng để lưu trữ các dữ liệu. Với data class, các hàm
 như getter, setter, toString, equal(), copy() sẽ được định nghĩa sẵn.
 
-![](media/image39.png){width="6.295138888888889in"
-height="0.4444444444444444in"}
+![](media/image39.png)
 
 Dưới đây là một data class trong Kotlin, để khai báo nó, keyword "data
 class" sẽ được gọi
@@ -1075,8 +905,7 @@ Trong Kotlin, cái keyword chỉ khả năng truy cập gồm:
 -   Public: có thể truy cập bất cứ nơi nào
 
 ![Kotlin Visibility Modifiers -
-GeeksforGeeks](media/image40.jpeg){width="6.295138888888889in"
-height="2.0493055555555557in"}
+GeeksforGeeks](media/image40.jpeg)
 
 []{#_Toc73084882 .anchor}Hình : Kotlin visible modifier
 
@@ -1100,8 +929,7 @@ trong không biết bất cứ điều gì các layer bên ngoài
 
 ### Kiến trúc Clean
 
-![](media/image41.jpeg){width="6.295138888888889in"
-height="4.625694444444444in"}
+![](media/image41.jpeg)
 
 []{#_Toc73084883 .anchor}Hình : Kiến trúc clean
 
@@ -1162,8 +990,7 @@ Gradle kết hợp các ưu điểm của Ant và Maven đồng thời thêm và
 thiện mới và sử dụng Groovy trong việc giải quyết bài toán đóng gói.
 
 ![Java Basics: What Is Gradle? \|
-Rebel](media/image42.jpeg){width="6.295138888888889in"
-height="4.196527777777778in"}
+Rebel](media/image42.jpeg)
 
 []{#_Toc73084884 .anchor}Hình : Công cụ Gradle
 
@@ -1207,8 +1034,7 @@ Dưới đây là biểu đồ hiển thị hai biểu đồ nhiệm vụ mẫu,
 tượng và một biểu đồ cụ thể, với sự phụ thuộc giữa các nhiệm vụ được
 biểu thị dưới dạng mũi tên:
 
-![](media/image43.png){width="6.295138888888889in"
-height="3.5902777777777777in"}
+![](media/image43.png)
 
 []{#_Toc73084885 .anchor}Hình : Hai ví dụ về đồ thị nhiệm vụ Gradle
 
@@ -1280,8 +1106,7 @@ thống và sử dụng Firebase
 Để tạo nên sự khác biệt này, Firebase cung cấp cho các lập trình viên
 một số dịch vụ sau đây
 
-![](media/image45.png){width="6.295138888888889in"
-height="3.3006944444444444in"}
+![](media/image45.png)
 
 []{#_Toc73084887 .anchor}Hình : Một số dịch vụ mà Firebase cung cấp
 
@@ -1296,8 +1121,7 @@ của người dùng. Đặc biệt, Firebase có liên kết, sử dụng đăn
 các dịch vụ nổi tiếng như Facebook hay Google.
 
 ![Links do the right thing for the
-platform](media/image46.png){width="6.295138888888889in"
-height="3.5409722222222224in"}
+platform](media/image46.png)
 
 []{#_Toc73084888 .anchor}Hình : Firebase Auth đăng nhập bằng các dịch vụ
 nổi tiếng
@@ -1341,8 +1165,7 @@ databases. Trong đó:
     cần máy chủ. Bảo mật và xác thực dữ liệu sẽ được thông qua Quy tắc
     bảo mật mà firebase cung cấp
 
-![](media/image47.png){width="6.295138888888889in"
-height="3.479861111111111in"}
+![](media/image47.png)
 
 []{#_Toc73084889 .anchor}Hình : Quy tắc bảo mật được áp dụng trong
 Firebase
@@ -1350,14 +1173,11 @@ Firebase
 -   Các cơ sở dữ liệu có thể chia nhỏ thành nhiều cơ sở dữ liệu nhỏ hơn.
 
 > ![Firebase Realtime Database -
-> Javatpoint](media/image48.png){width="2.777083333333333in"
-> height="2.777083333333333in"}
+> Javatpoint](media/image48.png)
 
 []{#_Toc73084890 .anchor}Hình : Realtime database
 
-![](media/image49.png){width="6.295138888888889in"
-height="3.470833333333333in"}
-
+![](media/image49.png)
 []{#_Toc73084891 .anchor}Hình : Bảng điều khiển realtime database
 
 -   Firestore: Giống như Realtime Database, Firestore là một cơ sở dữ
@@ -1391,13 +1211,11 @@ height="3.470833333333333in"}
     số lượng khổng lồ các dữ liệu
 
 ![Cloud Firestore \|
-Firebase](media/image50.jpeg){width="6.295138888888889in"
-height="3.5409722222222224in"}
+Firebase](media/image50.jpeg)
 
 []{#_Toc73084892 .anchor}Hình : Cloud Firestore
 
-![](media/image51.png){width="6.295138888888889in"
-height="3.466666666666667in"}
+![](media/image51.png)
 
 []{#_Toc73084893 .anchor}Hình : Ví dụ về Firestore
 
@@ -1413,9 +1231,7 @@ height="3.466666666666667in"}
     giản nhờ hiệu suất của nó
 
 ![Realtime vs Cloud Firestore: Which Firebase Database to
-go?](media/image52.png){width="6.295138888888889in"
-height="5.136805555555555in"}
-
+go?](media/image52.png)
 []{#_Toc73084894 .anchor}Hình : So sánh giữa Realtime và Firestore
 database
 
@@ -1434,8 +1250,7 @@ Storage:
 
 ![Firebase & Google Cloud: What\'s different with Cloud Storage? \| by
 Doug Stevenson \| Google Developers \|
-Medium](media/image53.png){width="6.295138888888889in"
-height="3.78125in"}
+Medium](media/image53.png)
 
 []{#_Toc73084895 .anchor}Hình : Storage tại bẳng điều kiển của Firebase
 
@@ -1448,8 +1263,7 @@ JavaScript hoặc TypeScript sau đó lưu trữ lên Google's cloud. Chính vì
 thế, ứng dụng sẽ không cần phải chia ra thành một ứng dụng Backend
 riêng.
 
-![](media/image54.png){width="5.92799978127734in"
-height="2.8976246719160104in"}
+![](media/image54.png)
 
 []{#_Toc73084896 .anchor}Hình : Google cloud Functions
 
@@ -1481,8 +1295,7 @@ height="2.8976246719160104in"}
 ```
 -   Kiến trúc của Cloud Message:
 
-![](media/image55.png){width="6.295138888888889in"
-height="3.5409722222222224in"}
+![](media/image55.png)
 
 []{#_Toc73084897 .anchor}Hình : Kiến trúc của Cloud Messaging
 
@@ -1491,8 +1304,7 @@ phần xây dựng thông báo và xác định mục tiêu, ở phần này, c�
 hai đối tượng để xây dựng nên một thông báo. Đó có thể là Notifications
 Console GUI được cung cấp tại firebase console:
 
-![](media/image56.png){width="5.982142388451444in"
-height="3.2982622484689412in"}
+![](media/image56.png)
 
 []{#_Toc73084898 .anchor}Hình : Firebase Console
 
@@ -1607,8 +1419,7 @@ Campuchia.
 
 -   Sử dụng Gradle để quản lý các thư viện
 
-![](media/image57.png){width="5.7617530621172355in"
-height="5.276785870516186in"}
+![](media/image57.png)
 
 []{#_Toc73084899 .anchor}Hình : Một số thư viện được sử dụng trong ứng
 dụng
@@ -1620,8 +1431,7 @@ dụng
 Hệ thống sử dụng kiến trúc Clean Architecture. Chia thành 5 Module như
 sau:
 
-![](media/image58.png){width="4.097222222222222in"
-height="1.4305555555555556in"}
+![](media/image58.png)
 
 []{#_Toc73084900 .anchor}Hình : Các module của hệ thống
 
@@ -1631,8 +1441,7 @@ Hệ thống được chia thành 5 module, trong đó:
     ứng dụng. Ngoài ra nó còn chứa các entity được sử dụng. Là module
     trừu tượng nhất
 
-![](media/image59.png){width="4.1255588363954505in"
-height="5.803571741032371in"}
+![](media/image59.png)
 
 []{#_Toc73084901 .anchor}Hình : Domain Module
 
@@ -1641,15 +1450,14 @@ height="5.803571741032371in"}
     nghĩa các Mapper để chuyển dữ liệu từ dữ liệu mà mình truy vấn sang
     dữ liệu mà ứng dụng có thể sử dụng được
 
-![](media/image60.png){width="5.333333333333333in" height="4.0in"}
+![](media/image60.png)
 
 []{#_Toc73084902 .anchor}Hình : Module data
 
 -   datafb: Nơi để triển khai các interface ở data, định nghĩa các mã
     logic để truy vấn dữ liệu.
 
-![](media/image61.png){width="5.361111111111111in"
-height="4.138888888888889in"}
+![](media/image61.png)
 
 []{#_Toc73084903 .anchor}Hình : Module data firebase
 
@@ -1657,8 +1465,7 @@ height="4.138888888888889in"}
     MVVM (Model View ViewModel). Lấy dữ liệu từ datafb cung cấp cho
     module app và đảm bảo dữ liệu luôn được cập nhật khi thay đổi
 
-![](media/image62.png){width="5.319444444444445in"
-height="4.208333333333333in"}
+![](media/image62.png)
 
 []{#_Toc73084904 .anchor}Hình : Module presentation
 
@@ -1666,13 +1473,11 @@ height="4.208333333333333in"}
     thiết lập giao diện người dùng, ngoài ra lớp này còn đảm nhiệm vai
     trò xác thực người dùng
 
-![](media/image63.png){width="5.388888888888889in"
-height="7.777777777777778in"}
+![](media/image63.png)
 
 []{#_Toc73084905 .anchor}Hình : Module app
 
-![](media/image64.png){width="6.295138888888889in"
-height="0.9555555555555556in"}
+![](media/image64.png)
 
 []{#_Toc73084906 .anchor}Hình : Luồng của cấu trúc
 
@@ -1688,23 +1493,19 @@ trải nghiệm của người dùng cũng như sự chính xác của hệ th�
 
 #### Sơ đồ mức 0
 
-![](media/image65.png){width="5.291666666666667in"
-height="2.638888888888889in"}
+![](media/image65.png)
 
 []{#_Toc73084907 .anchor}Hình : Sơ đồ luồng dữ liệu mức ngữ cảnh
 
 #### Sơ đồ mức đỉnh:
 
-![](media/image66.png){width="6.295138888888889in"
-height="4.352083333333334in"}
+![](media/image66.png)
 
 []{#_Toc73084908 .anchor}Hình : Sơ đồ luồng dữ liệu mức đỉnh
 
 ### Sơ đồ Use-case:
 
-![](media/image67.png){width="6.295138888888889in"
-height="4.9215277777777775in"}
-
+![](media/image67.png)
 []{#_Toc73084909 .anchor}Hình : Sơ đồ Use-case
 
 Ứng dụng sẽ gồm 4 user, trong đó:
@@ -1730,9 +1531,7 @@ height="4.9215277777777775in"}
 
 #### Chức năng đăng nhập
 
-![](media/image68.png){width="6.295138888888889in"
-height="5.179861111111111in"}
-
+![](media/image68.png)
 []{#_Toc73084910 .anchor}Hình : Sơ đồ sequence cho login
 
 Sơ đồ trên có thể hiểu như sau: Khi người dùng mở app, ActivityManager
@@ -1757,8 +1556,7 @@ báo đến người dùng.
 
 #### Chức năng xem thông báo
 
-![](media/image69.png){width="6.295138888888889in"
-height="3.4493055555555556in"}
+![](media/image69.png)
 
 []{#_Toc73084911 .anchor}Hình : Sơ đồ sequence cho chức năng xem thông
 báo
@@ -1777,7 +1575,7 @@ thông qua RecycleView
 
 #### Chức năng chia sẻ
 
-![](media/image70.png){width="6.295138888888889in" height="3.83125in"}
+![](media/image70.png)
 
 []{#_Toc73084912 .anchor}Hình : Sơ dồ sequence cho chức năng share
 
@@ -1788,8 +1586,7 @@ facebook, ...
 
 #### Chức năng gửi thông báo
 
-![](media/image71.png){width="6.295138888888889in"
-height="3.3618055555555557in"}
+![](media/image71.png)
 
 []{#_Toc73084913 .anchor}Hình : Sơ đồ sequence cho chức năng gửi thông
 báo
@@ -1809,8 +1606,7 @@ báo đến các thiết bị đã kết nối.
 Hệ thống sử dụng nosql database và lưu dưới dạng các document. Dữ liệu
 sẽ được lưu bằng 3 document chính là Notifications và Users và Topic
 
-![](media/image72.png){width="4.097222222222222in"
-height="1.8055555555555556in"}
+![](media/image72.png)
 
 []{#_Toc73084914 .anchor}Hình : Sơ đồ cơ sở dữ liệu
 
@@ -1819,22 +1615,19 @@ height="1.8055555555555556in"}
 Android studio: Một công cụ có gần như tất cả các công cụ để phát triển
 ứng dụng
 
-![](media/image73.png){width="6.295138888888889in"
-height="3.685416666666667in"}
+![](media/image73.png)
 
 []{#_Toc73084915 .anchor}Hình : Công cụ Android studio
 
 Firebase: Công cụ phía server
 
-![](media/image74.png){width="4.333333333333333in"
-height="2.7051662292213474in"}
+![](media/image74.png)
 
 []{#_Toc73084916 .anchor}Hình : Công cụ Firebase
 
 Emulator: Máy ảo cần thiết để test app
 
-![](media/image75.png){width="3.1658530183727036in"
-height="5.446428258967629in"}
+![](media/image75.png)
 
 []{#_Toc73084917 .anchor}Hình : Công cụ máy ảo
 
@@ -1844,8 +1637,7 @@ Ngoài ra còn có Mindnode, Sketch... để thiết kế hệ thống.
 
 ## Icon của ứng dụng
 
-![](media/image76.png){width="3.3902438757655293in"
-height="5.762573272090989in"}
+![](media/image76.png)
 
 []{#_Toc73084918 .anchor}Hình : Icon ứng dụng
 
@@ -1854,8 +1646,7 @@ tắt của trường UDCK
 
 ## Giao diện đăng nhập ứng dụng
 
-![](media/image77.png){width="6.295138888888889in"
-height="3.6166666666666667in"}
+![](media/image77.png)
 
 []{#_Toc73084919 .anchor}Hình : Màn hình login chính
 
@@ -1864,9 +1655,7 @@ chọn việc đăng nhập bằng Google, Facebook hay đăng nhập bằng Ema
 
 ### Giao diện chào mừng cho lần đầu đăng nhập
 
-![](media/image78.png){width="6.295138888888889in"
-height="2.7319444444444443in"}
-
+![](media/image78.png)
 []{#_Toc73084920 .anchor}Hình : Màn hình cho chào mừng
 
 Đây là màn hình chào mừng của chương trình, màn hình sẽ được hiển thị
@@ -1875,8 +1664,7 @@ người dùng sẽ được khởi tạo trên dữ liệu đám mây Firestore
 
 ## Giao diện chính của ứng dụng
 
-![](media/image79.png){width="4.9320702099737534in"
-height="8.767857611548557in"}
+![](media/image79.png)
 
 []{#_Toc73084921 .anchor}Hình : Màn hình chính, cho phép xem thông báo
 
@@ -1889,8 +1677,7 @@ thanh điều hướng gồm 4 phần.
 
 ## Giao diện gửi thông báo
 
-![](media/image80.png){width="4.696013779527559in"
-height="8.348214129483814in"}
+![](media/image80.png)
 
 []{#_Toc73084922 .anchor}Hình : Màn hình gửi thông báo
 
@@ -1901,14 +1688,12 @@ nút này, một màn hình sẽ hiển thị và người dùng sẽ chọn cá
 nhận được thông báo. Chức năng này chỉ được sử dụng bởi những tài khoản
 có quyền truy cập, nếu không, nó sẽ hiện lỗi.
 
-![](media/image81.png){width="4.335820209973753in"
-height="7.707890419947507in"}
+![](media/image81.png)
 
 []{#_Toc73084923 .anchor}Hình : Giao diện lỗi khi tài khoản không có đủ
 quyền trong hệ thống
 
-![](media/image82.png){width="5.024873140857393in"
-height="8.93283573928259in"}
+![](media/image82.png)
 
 []{#_Toc73084924 .anchor}Hình : Màn hình lựa chọn đối tượng
 
@@ -1916,20 +1701,17 @@ Sau khi nhấn gửi, ứng dụng sẽ đẩy dữ liệu lên FireStore. Sau �
 dụng sẽ thực hiện một Request đến FCM và gửi thông báo đến các thiết bị
 có kết nối.
 
-![](media/image83.png){width="6.053570647419073in"
-height="3.445826771653543in"}
+![](media/image83.png)
 
 []{#_Toc73084925 .anchor}Hình : Dữ liệu sau khi được đẩy lên Firebase
 
-![](media/image84.jpeg){width="2.813432852143482in"
-height="5.784862204724409in"}
+![](media/image84.jpeg)
 
 []{#_Toc73084926 .anchor}Hình : Màn hình thông báo
 
 ## Giao diện user
 
-![](media/image85.png){width="4.059360236220472in"
-height="7.216418416447944in"}
+![](media/image85.png)
 
 []{#_Toc73084927 .anchor}Hình : Màn hình User
 
@@ -1938,8 +1720,7 @@ Màn hình hiển thị thông tin người dùng, có thể đăng xuất khi n
 
 ## Giao diện trang web Udck
 
-![](media/image86.jpeg){width="3.6044772528433944in"
-height="7.4113768591426075in"}
+![](media/image86.jpeg)
 
 []{#_Toc73084928 .anchor}Hình : Giao diện truy cập trang web UDCK
 
@@ -1949,9 +1730,7 @@ trường
 
 ## Giao diện chọn đối tượng để nhận thông báo
 
-![](media/image87.png){width="3.7948917322834648in"
-height="6.746268591426071in"}
-
+![](media/image87.png)
 []{#_Toc73084929 .anchor}Hình : Giao diện chọn đăng kí đối tượng để nhận
 thông tin
 
@@ -1961,8 +1740,7 @@ bộ.
 
 ## Giao diện thông báo cá nhân
 
-![](media/image88.png){width="3.947761373578303in"
-height="7.018030402449694in"}
+![](media/image88.png)
 
 []{#_Toc73084930 .anchor}Hình : Giao diện thông báo cá nhân
 
@@ -1972,8 +1750,7 @@ nhắn thông báo gửi đến các đối tượng mà người dùng đã đ�
 
 ## Màn hình đổi ngôn ngữ
 
-![](media/image89.png){width="4.000589457567804in"
-height="7.111941163604549in"}
+![](media/image89.png)
 
 []{#_Toc73084931 .anchor}Hình : Giao diện chức năng đổi ngôn ngữ
 
@@ -1983,15 +1760,13 @@ thể truy cập và thay đổi trên hầu hết các màn hình
 
 ## Giao diện chức năng chia sẻ thông báo
 
-![](media/image90.jpeg){width="3.746268591426072in"
-height="7.70292760279965in"}
+![](media/image90.jpeg)
 
 []{#_Toc73084932 .anchor}Hình : Màn hình tính năng chia sẻ
 
 ## Màn hình xem chi tiết thông báo
 
-![](media/image91.jpeg){width="4.111941163604549in"
-height="8.454805336832896in"}
+![](media/image91.jpeg)
 
 []{#_Toc73084933 .anchor}Hình : Màn hình xem chi tiết thông báo
 
